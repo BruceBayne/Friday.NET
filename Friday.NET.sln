@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Autofac.Composition"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.ValueTypes", "Friday.ValueTypes\Friday.ValueTypes.csproj", "{8F968258-FCB6-48F5-A269-8A432D4F5F30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.ValueTypes.Tests", "Tests\Friday.ValueTypes.Tests\Friday.ValueTypes.Tests.csproj", "{28016384-5786-4F29-AA2F-20AAA6457593}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,9 +37,16 @@ Global
 		{8F968258-FCB6-48F5-A269-8A432D4F5F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F968258-FCB6-48F5-A269-8A432D4F5F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F968258-FCB6-48F5-A269-8A432D4F5F30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28016384-5786-4F29-AA2F-20AAA6457593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28016384-5786-4F29-AA2F-20AAA6457593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28016384-5786-4F29-AA2F-20AAA6457593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28016384-5786-4F29-AA2F-20AAA6457593}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28016384-5786-4F29-AA2F-20AAA6457593} = {21095F0C-C3D6-433E-A890-F9EC82BBFB1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05647CB0-A0E2-442D-ADC2-124A5E86C329}
