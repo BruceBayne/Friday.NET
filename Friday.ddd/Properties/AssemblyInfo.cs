@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Friday.NET")]
+[assembly: AssemblyTitle("Friday.ddd")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Friday.NET")]
+[assembly: AssemblyProduct("Friday.ddd")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b49b3815-f414-4d38-ad05-b94cd1cbe9e9")]
+[assembly: Guid("20062b12-df77-4e5c-98fd-dc69308909a6")]
 
 // Version information for an assembly consists of the following four values:
 //
