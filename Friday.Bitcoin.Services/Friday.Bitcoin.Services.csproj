@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9565AC3-1015-4E8D-8779-EDA6352E8C51}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Friday.Bitcoin.Services</RootNamespace>
+    <AssemblyName>Friday.Bitcoin.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NBitcoin, Version=4.0.0.38, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.4.0.0.38\lib\net452\NBitcoin.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="QBitNinja.Client, Version=1.0.3.39, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QBitNinja.Client.1.0.3.39\lib\net45\QBitNinja.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BlockChain.info\Exchange\BitcoinExchangeRecord.cs" />
+    <Compile Include="BlockChain.info\Exchange\BitcoinExchangeSummary.cs" />
+    <Compile Include="BlockChain.info\Exchange\BitcoinFormatter.cs" />
+    <Compile Include="BlockChain.info\Exchange\BlockChainRateService.cs" />
+    <Compile Include="BitCoinBalanceLoader.cs" />
+    <Compile Include="PaymentMonitor\BlockChain\TransactionIdentity.cs" />
+    <Compile Include="PaymentMonitor\Payments\IncomingPaymentMonitor.cs" />
+    <Compile Include="PaymentMonitor\Payments\MoneyEventInfo.cs" />
+    <Compile Include="PaymentMonitor\Payments\MonitoringBlock.cs" />
+    <Compile Include="PaymentMonitor\Payments\PaymentMonitorException.cs" />
+    <Compile Include="PaymentMonitor\Payments\PaymentMonitorSettings.cs" />
+    <Compile Include="PaymentMonitor\Transfer\IPrepareTransfer.cs" />
+    <Compile Include="PaymentMonitor\Transfer\KeysWithTransactions.cs" />
+    <Compile Include="PaymentMonitor\Transfer\PrepareTransfer.cs" />
+    <Compile Include="PaymentMonitor\Transfer\PrepareTransferException.cs" />
+    <Compile Include="PaymentMonitor\Transfer\TransferDetails.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Friday.ValueTypes\Friday.ValueTypes.csproj">
+      <Project>{8F968258-FCB6-48F5-A269-8A432D4F5F30}</Project>
+      <Name>Friday.ValueTypes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

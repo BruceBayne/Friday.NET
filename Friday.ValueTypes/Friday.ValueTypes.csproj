@@ -35,7 +35,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Currencies\BitCoin.cs" />
-    <Compile Include="GuidIdentity.cs" />
+    <Compile Include="Currencies\BitCoinExtensions.cs" />
+    <Compile Include="Identity\GuidIdentity.cs" />
     <Compile Include="Percent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

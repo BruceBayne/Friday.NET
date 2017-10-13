@@ -5,31 +5,35 @@ namespace Friday.ValueTypes.Currencies
 {
     public struct BitCoin : IEqualityComparer<BitCoin>, IComparable<BitCoin>
     {
+        public const uint BitsInOneBtc = 1_000_000;
+        public const uint SatoshiInOneBtc = 100_000_000;
+
         public readonly ulong SatoshiAmount;
+
 
 
         public decimal ToBtc()
         {
-            return (decimal) SatoshiAmount / (decimal) SatoshiInOneBtc;
+
+            return (decimal)SatoshiAmount / (decimal)SatoshiInOneBtc;
         }
 
 
         public override string ToString()
         {
+
             var formatted = SatoshiAmount.ToString("N0");
 
 
             return $"{nameof(SatoshiAmount)}: {formatted}";
         }
 
-        public const uint BitsInOneBtc = 1_000_000;
-        public const uint SatoshiInOneBtc = 100_000_000;
-        public static BitCoin Zero => new BitCoin(0);
+       public static BitCoin Zero => new BitCoin(0);
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is BitCoin && Equals((BitCoin) obj);
+            return obj is BitCoin && Equals((BitCoin)obj);
         }
 
         public override int GetHashCode()
@@ -58,8 +62,8 @@ namespace Friday.ValueTypes.Currencies
                 ulong satoshiAmount = btcAmount * SatoshiInOneBtc;
                 return new BitCoin(satoshiAmount);
             }
-        }
 
+        }
         public static BitCoin FromBits(uint bits)
         {
             checked
@@ -73,7 +77,6 @@ namespace Friday.ValueTypes.Currencies
         {
             return new BitCoin(satoshiAmount);
         }
-
         public BitCoin Add(BitCoin other)
         {
             checked
@@ -81,24 +84,24 @@ namespace Friday.ValueTypes.Currencies
                 return new BitCoin(SatoshiAmount + other.SatoshiAmount);
             }
         }
-
         public BitCoin Subtract(BitCoin other)
         {
             checked
             {
                 return new BitCoin(SatoshiAmount - other.SatoshiAmount);
             }
+
         }
 
         public static BitCoin operator +(BitCoin m1, BitCoin m2)
         {
             return m1.Add(m2);
         }
-
         public static BitCoin operator -(BitCoin m1, BitCoin m2)
         {
             return m1.Subtract(m2);
         }
+
 
 
         public static bool operator ==(BitCoin m1, BitCoin m2)
@@ -141,7 +144,7 @@ namespace Friday.ValueTypes.Currencies
 
         public int GetHashCode(BitCoin obj)
         {
-            return (int) (SatoshiAmount ^ (SatoshiAmount >> 32));
+            return (int)(SatoshiAmount ^ (SatoshiAmount >> 32));
         }
     }
 }
