@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Network", "Friday.Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Bitcoin.Services", "Friday.Bitcoin.Services\Friday.Bitcoin.Services.csproj", "{E9565AC3-1015-4E8D-8779-EDA6352E8C51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Autofac.Composition.Tests", "Tests\Friday.Autofac.Composition.Tests\Friday.Autofac.Composition.Tests\Friday.Autofac.Composition.Tests.csproj", "{9E3E99FE-D601-4C63-9ECD-CCFD3F6CF791}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{E9565AC3-1015-4E8D-8779-EDA6352E8C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9565AC3-1015-4E8D-8779-EDA6352E8C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9565AC3-1015-4E8D-8779-EDA6352E8C51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E3E99FE-D601-4C63-9ECD-CCFD3F6CF791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E3E99FE-D601-4C63-9ECD-CCFD3F6CF791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E3E99FE-D601-4C63-9ECD-CCFD3F6CF791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E3E99FE-D601-4C63-9ECD-CCFD3F6CF791}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{28016384-5786-4F29-AA2F-20AAA6457593} = {21095F0C-C3D6-433E-A890-F9EC82BBFB1D}
 		{4245B211-9CCB-4372-8ECB-29B847526A02} = {21095F0C-C3D6-433E-A890-F9EC82BBFB1D}
+		{9E3E99FE-D601-4C63-9ECD-CCFD3F6CF791} = {21095F0C-C3D6-433E-A890-F9EC82BBFB1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05647CB0-A0E2-442D-ADC2-124A5E86C329}

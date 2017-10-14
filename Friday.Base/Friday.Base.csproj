@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Friday.Base</RootNamespace>
     <AssemblyName>Friday.Base</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +38,7 @@
     <Compile Include="Collections\LimitedSizeStack.cs" />
     <Compile Include="Compression\QuickLZ\QuickLz.cs" />
     <Compile Include="Exceptions\TypeNotFoundException.cs" />
-    <Compile Include="Extensions\ArrayExtensions.cs" />
+    <Compile Include="Extensions\ArrayExtenstions.cs" />
     <Compile Include="Extensions\Enumerable\EnumerableExtension.cs" />
     <Compile Include="Extensions\Enum\EnumExtensions.cs" />
     <Compile Include="Extensions\Exceptions\ExceptionExtensions.cs" />
@@ -59,7 +60,18 @@
     <Compile Include="Random\RandomCharGenerator.cs" />
     <Compile Include="Random\RandomCharGeneratorConfiguration.cs" />
     <Compile Include="References\ReferenceCounter.cs" />
+    <Compile Include="Routing\BasicUserNamePrincipal.cs" />
+    <Compile Include="Routing\RouteRule.cs" />
+    <Compile Include="Routing\Attributes\AuthRequiredAttribute.cs" />
+    <Compile Include="Routing\Attributes\AuthRequiredAttributeHandler.cs" />
+    <Compile Include="Routing\Exceptions\RouteValidationException.cs" />
+    <Compile Include="Routing\IRoutingContext.cs" />
+    <Compile Include="Routing\Attributes\RouteAttributeHandler.cs" />
+    <Compile Include="Routing\ObjectToRoute.cs" />
+    <Compile Include="Routing\RouteOptions.cs" />
     <Compile Include="Routing\RoutingProvider.cs" />
+    <Compile Include="Routing\StaticRoutingTableRecord.cs" />
+    <Compile Include="Serialization\ICompleteSerializer.cs" />
     <Compile Include="Serialization\IDeserializer.cs" />
     <Compile Include="Serialization\ISerializer.cs" />
   </ItemGroup>
