@@ -1,8 +1,15 @@
 ﻿namespace Friday.Base.Routing
 {
-    public enum RouteOptions
+    public struct RouteOptions
+    {
+        public RouteProcessingBehavior ProcessingBehavior;
+    }
+
+    public enum RouteProcessingBehavior
     {
         StopAfterFirstCall,
         ProcessAllRoutes,
     }
+
+
 }

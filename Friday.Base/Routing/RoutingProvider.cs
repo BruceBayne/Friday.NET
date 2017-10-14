@@ -63,13 +63,13 @@ namespace Friday.Base.Routing
 
             foreach (var record in routingTable)
             {
-                var p = new ObjectToRoute() {Context = context, Payload = routedObject, RouteRecord = record};
+                var p = new ObjectToRoute(context, routedObject, record);
                 await CallMethod(p);
             }
         }
 
 
-        private static object[] ProvideMethodArguments(ObjectToRoute objectToRoute)
+        private object[] ProvideMethodArguments(ObjectToRoute objectToRoute)
         {
             var methodParameters = objectToRoute.RouteRecord.SelectedMethod.GetParameters();
 
@@ -82,6 +82,9 @@ namespace Friday.Base.Routing
 
                 if (parameter.ParameterType.IsInstanceOfType(objectToRoute.Payload))
                     resultList.Add(objectToRoute.Payload);
+
+                if (parameter.ParameterType.IsInstanceOfType(this))
+                    resultList.Add(this);
             }
 
             return resultList.ToArray();
@@ -121,7 +124,7 @@ namespace Friday.Base.Routing
 
                 yield return new StaticRoutingTableRecord(apiRoute.RouteProcesor, methodInfo);
 
-                if (apiRoute.Options == RouteOptions.StopAfterFirstCall)
+                if (apiRoute.Options.ProcessingBehavior == RouteProcessingBehavior.StopAfterFirstCall)
                     yield break;
             }
         }

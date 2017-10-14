@@ -11,14 +11,14 @@
         {
             RouteTemplate = string.Empty;
             RouteProcesor = processor;
-            Options = RouteOptions.StopAfterFirstCall;
+            Options = new RouteOptions();
         }
 
         public RouteRule(string routeTemplate, object processor)
         {
             RouteTemplate = routeTemplate;
             RouteProcesor = processor;
-            Options = RouteOptions.StopAfterFirstCall;
+            Options = new RouteOptions();
         }
 
         public RouteRule(string routeTemplate, object processor, RouteOptions options)

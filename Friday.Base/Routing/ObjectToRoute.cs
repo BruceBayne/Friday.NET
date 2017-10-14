@@ -2,8 +2,15 @@
 {
     public struct ObjectToRoute
     {
-        public IRoutingContext Context;
-        public object Payload;
-        public StaticRoutingTableRecord RouteRecord;
+        public readonly IRoutingContext Context;
+        public readonly object Payload;
+        public readonly StaticRoutingTableRecord RouteRecord;
+
+        public ObjectToRoute(IRoutingContext context, object payload, StaticRoutingTableRecord routeRecord)
+        {
+            Context = context;
+            Payload = payload;
+            RouteRecord = routeRecord;
+        }
     }
 }

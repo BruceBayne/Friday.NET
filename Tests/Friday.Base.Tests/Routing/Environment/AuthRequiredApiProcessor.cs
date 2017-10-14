@@ -3,6 +3,10 @@ using Friday.Base.Routing.Attributes;
 
 namespace Friday.Base.Tests.Routing.Environment
 {
+
+
+    
+
     internal class AuthRequiredApiProcessor
     {
         [AuthRequired]

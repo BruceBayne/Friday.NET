@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Friday.Network</id>
+        <version>1.0.6</version>
+        <authors>BruceBayne</authors>
+        <projectUrl>https://github.com/BruceBayne/Friday.NET</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Will be here soon</description>
+        <summary>Network part of Friday.NET framework</summary>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="Friday.Base" version="1.0.1" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Debug\Friday.Network.dll" target="lib\net46\Friday.Network.dll" />
+    </files>
+</package>

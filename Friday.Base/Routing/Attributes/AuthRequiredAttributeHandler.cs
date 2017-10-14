@@ -23,7 +23,7 @@ namespace Friday.Base.Routing.Attributes
 
         private static bool IsContextAuthorized(IRoutingContext context)
         {
-            if (context.Principal?.Identity == null)
+            if (context?.Principal?.Identity == null)
                 return false;
 
             return context.Principal.Identity.IsAuthenticated;
