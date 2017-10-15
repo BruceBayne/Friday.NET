@@ -6,6 +6,30 @@ using Friday.Base.Routing.Attributes;
 
 namespace Friday.Base.Routing
 {
+
+    public interface IObjectRouter
+    {
+        void RouteCall<T>(Action<T> callAction) where T : class;
+        void RouteObject(IRoutingContext context, object routedObject);
+
+
+    }
+    
+    public interface IAsyncObjectRouter
+    {
+     
+        Task RouteCallAsync<T>(Func<T, Task> callAction) where T : class;
+        Task RouteObjectAsync(IRoutingContext context, object routedObject);
+    }
+
+
+    public interface ICompleteObjectRouter: IObjectRouter, IAsyncObjectRouter
+    {
+        
+
+    }
+
+
     public class RoutingProvider
     {
         private readonly List<RouteAttributeHandler> attributeHandlers = new List<RouteAttributeHandler>();
