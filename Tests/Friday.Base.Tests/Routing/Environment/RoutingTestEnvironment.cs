@@ -31,7 +31,7 @@ namespace Friday.Base.Tests.Routing.Environment
         internal static RoutingProvider GetDefaultRoutingProvider(object processor)
         {
             var provider = new RoutingProvider();
-            provider.RegisterRoute(new RouteRule("On{typeName}", processor));
+            provider.RegisterRoute(new RouteRule("default", "On{typeName}", processor));
             return provider;
         }
     }

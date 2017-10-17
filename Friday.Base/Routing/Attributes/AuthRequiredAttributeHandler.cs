@@ -3,21 +3,23 @@ using Friday.Base.Routing.Exceptions;
 
 namespace Friday.Base.Routing.Attributes
 {
-    public  class AuthRequiredAttributeHandler : RouteAttributeHandler
+    public class AuthRequiredAttributeHandler : RouteAttributeHandler
     {
         public class NotAuthorizedException : RouteValidationException
         {
-            
         }
 
         public override void Validate(ObjectToRoute obj)
         {
-            var attrInfo = obj.RouteRecord.SelectedMethod.GetCustomAttribute<AuthRequiredAttribute>();
+            CheckAttribute(obj, obj.RouteRecord.Processor.GetType().GetCustomAttribute<AuthRequiredAttribute>());
+            CheckAttribute(obj, obj.RouteRecord.SelectedMethod.GetCustomAttribute<AuthRequiredAttribute>());
+        }
 
+        private static void CheckAttribute(ObjectToRoute obj, AuthRequiredAttribute attrInfo)
+        {
             if (attrInfo != null && !IsContextAuthorized(obj.Context))
             {
                 throw new NotAuthorizedException();
-
             }
         }
 
@@ -27,7 +29,6 @@ namespace Friday.Base.Routing.Attributes
                 return false;
 
             return context.Principal.Identity.IsAuthenticated;
-
         }
     }
 }

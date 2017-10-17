@@ -61,6 +61,10 @@
     <Compile Include="Random\RandomCharGeneratorConfiguration.cs" />
     <Compile Include="References\ReferenceCounter.cs" />
     <Compile Include="Routing\BasicUserNamePrincipal.cs" />
+    <Compile Include="Routing\IAsyncObjectRouter.cs" />
+    <Compile Include="Routing\ICompleteObjectRouter.cs" />
+    <Compile Include="Routing\IObjectRouter.cs" />
+    <Compile Include="Routing\IRouteRegistry.cs" />
     <Compile Include="Routing\RouteRule.cs" />
     <Compile Include="Routing\Attributes\AuthRequiredAttribute.cs" />
     <Compile Include="Routing\Attributes\AuthRequiredAttributeHandler.cs" />

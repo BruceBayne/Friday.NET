@@ -45,7 +45,10 @@
     <Compile Include="PacketMaintainers\INetworkPacketMaintainer.cs" />
     <Compile Include="PacketMaintainers\NetworkPacketMaintainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session\ITransportSession.cs" />
+    <Compile Include="Session\IOnException.cs" />
+    <Compile Include="Session\ISessionBasics.cs" />
+    <Compile Include="Session\ISessionClose.cs" />
+    <Compile Include="Session\ISessionOpen.cs" />
     <Compile Include="SocketSettings.cs" />
     <Compile Include="StreamExtenstions.cs" />
   </ItemGroup>

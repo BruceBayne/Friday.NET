@@ -1,40 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Friday.Base.Routing.Attributes;
 
 namespace Friday.Base.Routing
 {
-
-    public interface IObjectRouter
-    {
-        void RouteCall<T>(Action<T> callAction) where T : class;
-        void RouteObject(IRoutingContext context, object routedObject);
-
-
-    }
-    
-    public interface IAsyncObjectRouter
-    {
-     
-        Task RouteCallAsync<T>(Func<T, Task> callAction) where T : class;
-        Task RouteObjectAsync(IRoutingContext context, object routedObject);
-    }
-
-
-    public interface ICompleteObjectRouter: IObjectRouter, IAsyncObjectRouter
-    {
-        
-
-    }
-
-
-    public class RoutingProvider
+    public class RoutingProvider : IObjectRouter, IRouteRegistry
     {
         private readonly List<RouteAttributeHandler> attributeHandlers = new List<RouteAttributeHandler>();
         private readonly List<RouteRule> routes = new List<RouteRule>();
 
+        public IReadOnlyCollection<RouteRule> Routes => routes.ToList();
 
         public void RegisterAttributeHandler(RouteAttributeHandler handler)
         {
@@ -46,6 +24,11 @@ namespace Friday.Base.Routing
             if (routeRule.RouteProcesor == null)
                 throw new ArgumentNullException(nameof(routeRule.RouteProcesor));
             routes.Add(routeRule);
+        }
+        
+        public bool UnregisterRoute(string routeName)
+        {
+            return routes.RemoveAll(x => x.RouteName == routeName)>0;
         }
 
 
