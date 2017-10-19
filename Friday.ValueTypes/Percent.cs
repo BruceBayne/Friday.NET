@@ -1,6 +1,8 @@
-﻿namespace Friday.ValueTypes
+﻿using System;
+
+namespace Friday.ValueTypes
 {
-    public struct Percent
+    public struct Percent : IComparable<Percent>
     {
         public readonly decimal Value;
 
@@ -65,6 +67,31 @@
         public static bool operator <(Percent m1, Percent m2)
         {
             return m1.Value < m2.Value;
+        }
+
+        public static bool operator <=(Percent m1, Percent m2)
+        {
+            return m1.Value <= m2.Value;
+        }
+
+        public static bool operator >=(Percent m1, Percent m2)
+        {
+            return m1.Value >= m2.Value;
+        }
+
+        public static bool operator ==(Percent m1, Percent m2)
+        {
+            return m1.Value == m2.Value;
+        }
+
+        public static bool operator !=(Percent m1, Percent m2)
+        {
+            return m1.Value != m2.Value;
+        }
+
+        public int CompareTo(Percent other)
+        {
+            return Value.CompareTo(other.Value);
         }
     }
 }

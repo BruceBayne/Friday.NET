@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Currencies\BitcoinCurrencyTests.cs" />
     <Compile Include="Currencies\BitcoinPercentageTests.cs" />
+    <Compile Include="Math\PercentValueTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
