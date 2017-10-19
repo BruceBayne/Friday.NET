@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Friday.ValueTypes.Currencies
 {
@@ -11,6 +13,11 @@ namespace Friday.ValueTypes.Currencies
 
 
             return BitCoin.FromSatoshi((ulong) Math.Floor(totalSatoshi));
+        }
+
+        public static BitCoin Sum<T>(this IEnumerable<T> z, Func<T, BitCoin> selector)
+        {
+            return z.Aggregate(BitCoin.Zero, (current, coin) => current + selector(coin));
         }
     }
 }

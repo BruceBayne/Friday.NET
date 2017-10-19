@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using Friday.ValueTypes.Currencies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,6 +9,18 @@ namespace Friday.ValueTypes.Tests.Currencies
     [TestCategory(nameof(BitCoin))]
     public class BitcoinCurrencyTests
     {
+        [TestMethod]
+        public void SumOfBitcoinEnumerableShouldBe100500Satoshi()
+        {
+            var btcList = new List<BitCoin>()
+            {
+                BitCoin.FromSatoshi(100_000),
+                BitCoin.FromSatoshi(500)
+            };
+
+            btcList.Sum(b => b).Should().Be(BitCoin.FromSatoshi(100_500));
+        }
+
         [TestMethod]
         public void TwoSameBitcoinAmountShouldBeEqual()
         {
