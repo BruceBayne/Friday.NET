@@ -31,6 +31,21 @@ namespace Friday.Base.Extensions.Reflection
             destination.CopyFields(source);
         }
 
+        public static T MapPropertiesWithFieldsFrom<T>(this T destination, object source)
+        {
+            destination.CopyProperties(source);
+            destination.CopyFields(source);
+            return destination;
+        }
+
+        public static T MapPropertiesWithFieldsTo<T>(this object source) where T : new()
+        {
+            var destination = new T();
+            source.CopyProperties(destination);
+            source.CopyFields(destination);
+            return destination;
+        }
+
 
 
         /// <summary>
