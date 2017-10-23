@@ -140,6 +140,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Reflection\MappingTests.cs" />
+    <Compile Include="Reflection\Environment\TestEntity.cs" />
+    <Compile Include="Reflection\Environment\TestDto.cs" />
     <Compile Include="Routing\Attributes\RoutingAuthorizationTests.cs" />
     <Compile Include="Routing\Environment\RoutingTestEnvironment.cs" />
     <Compile Include="Routing\Environment\AuthRequiredApiProcessor.cs" />

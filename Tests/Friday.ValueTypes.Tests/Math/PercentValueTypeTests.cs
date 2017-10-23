@@ -8,7 +8,7 @@ namespace Friday.ValueTypes.Tests.Math
     public class PercentValueTypeTests
     {
         [TestMethod]
-        public void BasicOperatorsOverrideShouldWork()
+        public void BasicComparisonOperatorsOverrideShouldWork()
         {
             var percent100 = Percent.Hundred;
             var percent100Again = Percent.Hundred;
@@ -27,5 +27,62 @@ namespace Friday.ValueTypes.Tests.Math
             Assert.IsTrue(percent100 > percent50);
         }
 
+        [TestMethod]
+        public void PercentToPercentAdditionAndSubtractionShouldWork()
+        {
+            var percent1 = Percent.Hundred;
+            var percent2 = Percent.Fifty;
+            (percent1 - percent2).Should().Be(Percent.Fifty);
+            (percent1 + percent2).Should().Be(Percent.From(150));
+        }
+
+        [TestMethod]
+        public void CalculateMethodShouldReturnExpectedResults()
+        {
+            Percent.Calculate(TestInt, Percent.Ten).Should().Be(TenPercentTestInt);
+            Percent.Calculate(TestNegativeInt, Percent.Ten).Should().Be(-TenPercentTestInt);
+            Percent.Calculate(TestLong, Percent.Ten).Should().Be(TenPercentTestInt);
+            Percent.Calculate(TestNegativeLong, Percent.Ten).Should().Be(-TenPercentTestInt);
+            Percent.Calculate(TestDecimal, Percent.Ten).Should().Be(TenPercentTestDecimal);
+            Percent.Calculate(TestNegativeDecimal, Percent.Ten).Should().Be(-TenPercentTestDecimal);
+        }
+
+        [TestMethod]
+        public void PercentToNumberAdditionAndSubtractionShouldWork()
+        {
+            (TestInt + Percent.Fifty).Should().Be(HundredFiftyPercentTestInt);
+            (TestNegativeInt + Percent.Fifty).Should().Be(-HundredFiftyPercentTestInt);
+            (TestInt - Percent.Fifty).Should().Be(FiftyPercentTestInt);
+            (TestNegativeInt - Percent.Fifty).Should().Be(-FiftyPercentTestInt);
+
+            (TestLong + Percent.Fifty).Should().Be(HundredFiftyPercentTestInt);
+            (TestNegativeLong + Percent.Fifty).Should().Be(-HundredFiftyPercentTestInt);
+            (TestLong - Percent.Fifty).Should().Be(FiftyPercentTestInt);
+            (TestNegativeLong - Percent.Fifty).Should().Be(-FiftyPercentTestInt);
+
+
+            (TestDecimal + Percent.Fifty).Should().Be(HundredFiftyPercentTestDecimal);
+            (TestNegativeDecimal + Percent.Fifty).Should().Be(-HundredFiftyPercentTestDecimal);
+            (TestDecimal - Percent.Fifty).Should().Be(FiftyPercentTestDecimal);
+            (TestNegativeDecimal - Percent.Fifty).Should().Be(-FiftyPercentTestDecimal);
+        }
+
+        private int TestInt = 100500;
+        private int TestNegativeInt = -100500;
+
+        private long TestLong = 100500;
+        private long TestNegativeLong = -100500;
+
+        private decimal TestDecimal = 100.500M;
+        private decimal TestNegativeDecimal = -100.500M;
+
+
+        private int HundredFiftyPercentTestInt = 150750;
+        private int FiftyPercentTestInt = 50250;
+        private int TenPercentTestInt = 10050;
+
+        private decimal TenPercentTestDecimal = 10.05M;
+        private decimal HundredFiftyPercentTestDecimal = 150.75M;
+        private decimal FiftyPercentTestDecimal = 50.25M;
     }
 }
