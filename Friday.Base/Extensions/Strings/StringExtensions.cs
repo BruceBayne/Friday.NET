@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Friday.Base.Extensions.Strings
 {
@@ -12,6 +13,15 @@ namespace Friday.Base.Extensions.Strings
         {
             var g = new Regex(EmailRegexPattern);
             return g.IsMatch(input);
+        }
+
+        public static bool Contains(this string source, string value, StringComparison comp)
+        {
+            return source.IndexOf(value, comp) >= 0;
+        }
+        public static bool ContainsNoCase(this string source, string value)
+        {
+            return Contains(source, value, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

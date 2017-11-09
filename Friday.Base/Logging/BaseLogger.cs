@@ -12,6 +12,12 @@ namespace Friday.Base.Logging
         {
         }
 
+        public static string FormatLogLine(string line)
+        {
+            var dtTime = DateTime.Now.ToString("hh.mm.ss.fff");
+            return $"{dtTime} {line}";
+        }
+
         protected virtual string ExceptionToString(Exception e)
         {
             return e.ToString();

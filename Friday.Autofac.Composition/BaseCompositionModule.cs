@@ -35,17 +35,17 @@ namespace Friday.Autofac.Composition
 
         protected void RegisterTypeAsSingleton<T>(ContainerBuilder builder) where T : class
         {
-            builder.RegisterType<T>().AsSelf().AsImplementedInterfaces().SingleInstance().ExternallyOwned();
+            builder.RegisterType<T>().AsSelf().AsImplementedInterfaces().SingleInstance();
         }
         protected void RegisterTypesAsSingletonThatImplements<T>(Assembly assemblyLookIn,ContainerBuilder builder) where T : class
         {
             RegisterTypesThatImplements<T>(assemblyLookIn,builder,
-                x => x.SingleInstance().ExternallyOwned().AsSelf().AsImplementedInterfaces());
+                x => x.SingleInstance().AsSelf().AsImplementedInterfaces());
         }
 
         protected void RegisterTypesThatImplements<T>(Assembly assemblyLookIn,ContainerBuilder builder) where T : class
         {
-            RegisterTypesThatImplements<T>(assemblyLookIn,builder, x => x.AsSelf().ExternallyOwned().AsImplementedInterfaces());
+            RegisterTypesThatImplements<T>(assemblyLookIn,builder, x => x.AsSelf().AsImplementedInterfaces());
         }
 
 

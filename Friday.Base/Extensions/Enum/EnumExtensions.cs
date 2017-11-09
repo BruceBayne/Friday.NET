@@ -7,8 +7,6 @@ namespace Friday.Base.Extensions.Enum
 {
     public static class EnumExtensions
     {
-
-
         private static System.Random GetRandom(int seed = 0)
         {
             if (seed == 0)
@@ -23,13 +21,13 @@ namespace Friday.Base.Extensions.Enum
         }
 
 
-        public static T RandomValue<T>(this T enumeratedType, IEnumerable<string> allowed, int seed = 0) where T : struct
+        public static T RandomValue<T>(this T enumeratedType, IEnumerable<string> allowed, int seed = 0)
+            where T : struct
         {
             var v = System.Enum.GetValues(typeof(T));
             var arr = v.Cast<T>().Where(x => allowed.Contains(x.ToString())).ToArray();
             return (T)arr.GetValue(GetRandom(seed).Next(arr.Length));
         }
-
 
 
         public static bool ContainExactFlagSet(this System.Enum obj, System.Enum flags)
@@ -44,10 +42,8 @@ namespace Friday.Base.Extensions.Enum
             {
                 if (!setFlags.Contains(tmpFlag))
                     return false;
-
             }
             return true;
-
         }
 
 
@@ -55,7 +51,6 @@ namespace Friday.Base.Extensions.Enum
         {
             foreach (var value in System.Enum.GetValues(flags.GetType()).Cast<System.Enum>())
             {
-
                 ulong num = Convert.ToUInt64(value);
 
                 var hasFlag = ((Convert.ToUInt64(flags) & num) == num);
@@ -72,7 +67,6 @@ namespace Friday.Base.Extensions.Enum
                 yield return value;
             }
         }
-
 
 
         public static T Next<T>(this T src) where T : struct
@@ -94,7 +88,7 @@ namespace Friday.Base.Extensions.Enum
             }
 
             if (typeof(TEnum).GetCustomAttributes(
-                typeof(FlagsAttribute), false).Length == 0)
+                    typeof(FlagsAttribute), false).Length == 0)
             {
                 throw new InvalidOperationException("Enum must use [Flags].");
             }

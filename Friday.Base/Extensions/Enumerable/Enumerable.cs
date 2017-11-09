@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Friday.Base.Extensions.Enumerable
@@ -9,5 +10,10 @@ namespace Friday.Base.Extensions.Enumerable
         {
             return System.Linq.Enumerable.Range(firstLetter, lastLetter - firstLetter + 1).Select(c => (char)c).ToList();
         }
+
+
+
+   
+
     }
 }

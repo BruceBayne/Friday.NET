@@ -25,10 +25,10 @@ namespace Friday.Base.Routing
                 throw new ArgumentNullException(nameof(routeRule.RouteProcesor));
             routes.Add(routeRule);
         }
-        
+
         public bool UnregisterRoute(string routeName)
         {
-            return routes.RemoveAll(x => x.RouteName == routeName)>0;
+            return routes.RemoveAll(x => x.RouteName == routeName) > 0;
         }
 
 

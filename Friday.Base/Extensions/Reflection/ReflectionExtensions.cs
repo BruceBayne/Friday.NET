@@ -7,9 +7,6 @@ namespace Friday.Base.Extensions.Reflection
 {
     public static class ReflectionExtensions
     {
-
-
-
         public static IEnumerable<T> GetPropertiesThatImplements<T>(this object propertyHolder) where T : class
         {
             var properties = propertyHolder.GetType().GetProperties();
@@ -45,7 +42,6 @@ namespace Friday.Base.Extensions.Reflection
             source.CopyFields(destination);
             return destination;
         }
-
 
 
         /// <summary>

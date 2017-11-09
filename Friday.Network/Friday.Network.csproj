@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Friday.Base\Friday.Base.csproj">
-      <Project>{C278F354-A597-43EF-98B6-E762882AD81C}</Project>
+      <Project>{7ee1e87c-92e8-441b-9b99-625815e48d76}</Project>
       <Name>Friday.Base</Name>
     </ProjectReference>
   </ItemGroup>
