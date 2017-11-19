@@ -1,15 +1,21 @@
 ﻿namespace Friday.Base.Routing
 {
-    public struct RouteOptions
-    {
-        public RouteProcessingBehavior ProcessingBehavior;
-    }
+	public struct RouteOptions
+	{
+		public RouteProcessingBehavior ProcessingBehavior;
 
-    public enum RouteProcessingBehavior
-    {
-        StopAfterFirstCall,
-        ProcessAllRoutes,
-    }
+		public override string ToString()
+		{
+			return $"{nameof(ProcessingBehavior)}: {ProcessingBehavior}";
+		}
+	}
+
+	public enum RouteProcessingBehavior
+	{
+		Default,
+		BreakAfterFirstMatch,
+
+	}
 
 
 }

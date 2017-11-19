@@ -2,27 +2,28 @@
 
 namespace Friday.Base.Collections
 {
-    public class LimitedSizeStack<T> : LinkedList<T>
-    {
-        private readonly int maxSize;
-        public LimitedSizeStack(int maxSize)
-        {
-            this.maxSize = maxSize;
-        }
+	public class LimitedSizeStack<T> : LinkedList<T>
+	{
+		private readonly int maxSize;
 
-        public void Push(T item)
-        {
-            AddFirst(item);
+		public LimitedSizeStack(int maxSize)
+		{
+			this.maxSize = maxSize;
+		}
 
-            if (Count > maxSize)
-                RemoveLast();
-        }
+		public void Push(T item)
+		{
+			AddFirst(item);
 
-        public T Pop()
-        {
-            var item = First.Value;
-            RemoveFirst();
-            return item;
-        }
-    }
+			if (Count > maxSize)
+				RemoveLast();
+		}
+
+		public T Pop()
+		{
+			var item = First.Value;
+			RemoveFirst();
+			return item;
+		}
+	}
 }

@@ -2,16 +2,16 @@ using System;
 
 namespace Friday.Base.Exceptions
 {
-    public class TypeNotFoundException : Exception
-    {
+	public class TypeNotFoundException : Exception
+	{
 
-        public TypeNotFoundException(string s) : base(s)
-        {
+		public TypeNotFoundException(string message) : base(message)
+		{
 
-        }
-        public TypeNotFoundException(Type t) : base(t.ToString())
-        {
+		}
+		public TypeNotFoundException(Type t) : base(t.ToString())
+		{
 
-        }
-    }
+		}
+	}
 }
