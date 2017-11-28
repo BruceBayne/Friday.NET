@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Reflection\EventUtilsTests.cs" />
     <Compile Include="Reflection\MappingTests.cs" />
     <Compile Include="Reflection\Environment\TestEntity.cs" />
     <Compile Include="Reflection\Environment\TestDto.cs" />
