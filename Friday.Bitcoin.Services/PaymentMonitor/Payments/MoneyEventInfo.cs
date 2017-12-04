@@ -5,18 +5,27 @@ using NBitcoin;
 
 namespace Friday.Bitcoin.Services.PaymentMonitor.Payments
 {
-    public class MoneyEventInfo
-    {
-        public BitcoinAddress Address;
+	public sealed class MoneyEventInfo
+	{
+		public readonly BitcoinAddress Address;
+		public readonly long TotalSatoshi;
+		public readonly TransactionIdentity TransactionIdentity;
+		public readonly IList<Money> Money;
 
-        public override string ToString()
-        {
-            long amount = Money.Sum(money => money.Satoshi);
+		public override string ToString()
+		{
+			return $"{nameof(Address)}: {Address}, {nameof(TransactionIdentity)}: {TransactionIdentity} TotalSatoshi:{TotalSatoshi}";
+		}
 
-            return $"{nameof(Address)}: {Address}, {nameof(TransactionIdentity)}: {TransactionIdentity} SatoshiAmount:{amount}";
-        }
 
-        public TransactionIdentity TransactionIdentity;
-        public IList<Money> Money;
-    }
+		public MoneyEventInfo(BitcoinAddress address, TransactionIdentity transactionIdentity, IList<Money> money)
+		{
+			Address = address;
+			TransactionIdentity = transactionIdentity;
+			Money = money;
+
+			if (Money != null)
+				TotalSatoshi = Money.Sum(x => x.Satoshi);
+		}
+	}
 }

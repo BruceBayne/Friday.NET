@@ -31,14 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NBitcoin, Version=4.0.0.38, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NBitcoin.4.0.0.38\lib\net461\NBitcoin.dll</HintPath>
+    <Reference Include="NBitcoin, Version=4.0.0.48, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.4.0.0.48\lib\net461\NBitcoin.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="QBitNinja.Client, Version=1.0.3.41, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\QBitNinja.Client.1.0.3.41\lib\net461\QBitNinja.Client.dll</HintPath>
+    <Reference Include="QBitNinja.Client, Version=1.0.3.44, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QBitNinja.Client.1.0.3.44\lib\net45\QBitNinja.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,7 +65,10 @@
     <Compile Include="BlockChain.info\Exchange\BlockChainRateService.cs" />
     <Compile Include="BitCoinBalanceLoader.cs" />
     <Compile Include="PaymentMonitor\BlockChain\TransactionIdentity.cs" />
+    <Compile Include="PaymentMonitor\Payments\IIncomingPaymentMonitor.cs" />
+    <Compile Include="PaymentMonitor\Payments\IMoneyAmountChanged.cs" />
     <Compile Include="PaymentMonitor\Payments\IncomingPaymentMonitor.cs" />
+    <Compile Include="PaymentMonitor\Payments\IRegisterMonitoringAddress.cs" />
     <Compile Include="PaymentMonitor\Payments\MoneyEventInfo.cs" />
     <Compile Include="PaymentMonitor\Payments\MonitoringBlock.cs" />
     <Compile Include="PaymentMonitor\Payments\PaymentMonitorException.cs" />
