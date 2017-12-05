@@ -10,11 +10,11 @@ namespace Friday.Base.Tests.Routing
 	public class RoutingBasicTests
 	{
 		[TestMethod]
-		public void SimplestRoutingCallShouldWork()
+		public void SimplestStaticRoutingCallShouldWork()
 		{
 			//Arrange
 			var processor = Substitute.For<ISomeApiProcessor>();
-			var routingProvider = RoutingTestEnvironment.GetDefaultRoutingProvider(processor);
+			var routingProvider = RoutingTestEnvironment.GetStaticNamesRoutingProvider(processor);
 			var dto = RoutingTestEnvironment.GetTestDtoData();
 
 			//Act
@@ -33,7 +33,7 @@ namespace Friday.Base.Tests.Routing
 			//Arrange
 			var processor = Substitute.For<ISomeApiProcessor>();
 			var processor2 = Substitute.For<ISomeApiProcessor>();
-			var routingProvider = RoutingTestEnvironment.GetDefaultRoutingProvider(processor, processor2);
+			var routingProvider = RoutingTestEnvironment.GetStaticNamesRoutingProvider(processor, processor2);
 
 			var dto = RoutingTestEnvironment.GetTestDtoData();
 
@@ -51,7 +51,7 @@ namespace Friday.Base.Tests.Routing
 
 			//Arrange
 			var processor = Substitute.For<ISomeSessionProcessor>();
-			var routingProvider = RoutingTestEnvironment.GetDefaultRoutingProvider(processor);
+			var routingProvider = RoutingTestEnvironment.GetStaticNamesRoutingProvider(processor);
 
 			//Act
 			routingProvider.RouteCall<ISomeSessionProcessor>(

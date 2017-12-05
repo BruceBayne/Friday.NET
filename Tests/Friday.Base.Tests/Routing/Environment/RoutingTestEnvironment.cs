@@ -14,7 +14,7 @@ namespace Friday.Base.Tests.Routing.Environment
 		internal static (RoutingProvider provider, AuthRequiredApiProcessor processor) GetAuthProviderWithProcessor()
 		{
 			var processor = new AuthRequiredApiProcessor();
-			var provider = GetDefaultRoutingProvider(processor);
+			var provider = GetStaticNamesRoutingProvider(processor);
 			provider.RegisterAttributeHandler(new AuthRequiredAttributeHandler());
 			return (provider, processor);
 		}
@@ -25,13 +25,20 @@ namespace Friday.Base.Tests.Routing.Environment
 			return GetAuthProviderWithProcessor().provider;
 		}
 
-		internal static RoutingProvider GetDefaultRoutingProvider(params object[] processor)
+
+		internal static RoutingProvider GetInterfaceBasedRoutingProvider(params object[] processors)
+		{
+			var router = new RoutingProvider();
+			foreach (var processor in processors)
+				router.RegisterRoute(new RouteRule(processor, RouteOptions.UseInterfaceMessageHandler()));
+			return router;
+		}
+
+		internal static RoutingProvider GetStaticNamesRoutingProvider(params object[] processors)
 		{
 			var provider = new RoutingProvider();
-			foreach (var o in processor)
-			{
-				provider.RegisterRoute(new RouteRule("default_" + o.GetType().Name, "On{typeName}", o));
-			}
+			foreach (var processor in processors)
+				provider.RegisterRoute(new RouteRule(processor, RouteOptions.UseStatic("On{typeName}")));
 
 			return provider;
 		}

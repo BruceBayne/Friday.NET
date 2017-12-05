@@ -91,6 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\Environment\SomeDto.cs" />
     <Compile Include="Routing\RoutingBasicTests.cs" />
+    <Compile Include="Routing\RoutingInterfaceHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

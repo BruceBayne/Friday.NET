@@ -2,6 +2,8 @@
 using FluentAssertions;
 using Friday.Base.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable EventNeverSubscribedTo.Local
+#pragma warning disable 67
 
 namespace Friday.Base.Tests.Reflection
 {

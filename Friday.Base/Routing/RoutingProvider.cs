@@ -12,6 +12,9 @@ namespace Friday.Base.Routing
 		private readonly List<RouteAttributeHandler> attributeHandlers = new List<RouteAttributeHandler>();
 		private readonly List<RouteRule> routes = new List<RouteRule>();
 
+		private bool HasMessageHandlerRouting { get; set; }
+
+
 		public IReadOnlyCollection<RouteRule> Routes => routes.ToList();
 
 		public void RegisterAttributeHandler(RouteAttributeHandler handler)
@@ -23,18 +26,24 @@ namespace Friday.Base.Routing
 		{
 			if (routeRule.RouteProcesor == null)
 				throw new ArgumentNullException(nameof(routeRule.RouteProcesor));
+
+			if (routeRule.Options.UseInterfaceMessageRouting)
+				HasMessageHandlerRouting = true;
+
+
 			routes.Add(routeRule);
 		}
 
 		public bool UnregisterRoute(string routeName)
 		{
-			return routes.RemoveAll(x => x.RouteName == routeName) > 0;
+			var isRemoved = routes.RemoveAll(x => x.RouteName == routeName) > 0;
+			return isRemoved;
 		}
 
 
 		public void RouteCall<T>(Action<T> callAction) where T : class
 		{
-			var table = GetSuitableTableFor<T>();
+			var table = GetSuitableTableCallFor<T>();
 			foreach (var route in table)
 				callAction(route);
 		}
@@ -42,12 +51,12 @@ namespace Friday.Base.Routing
 
 		public async Task RouteCallAsync<T>(Func<T, Task> callAction) where T : class
 		{
-			var table = GetSuitableTableFor<T>();
+			var table = GetSuitableTableCallFor<T>();
 			foreach (var route in table)
 				await callAction(route);
 		}
 
-		private IEnumerable<T> GetSuitableTableFor<T>()
+		private IEnumerable<T> GetSuitableTableCallFor<T>()
 		{
 			foreach (var route in routes)
 			{
@@ -66,13 +75,23 @@ namespace Friday.Base.Routing
 
 		public async Task RouteObjectAsync(IRoutingContext context, object routedObject)
 		{
-			var routingTable = GetRoutingRecordsFor(routedObject);
-
+			var routingTable = GetSuitableRoutingRecords(routedObject);
 			foreach (var record in routingTable)
 			{
 				var p = new ObjectToRoute(context, routedObject, record);
 				await CallMethod(p);
 			}
+		}
+
+		private IEnumerable<StaticRoutingTableRecord> GetSuitableRoutingRecords(object routedObject)
+		{
+			var routingTable = GetStaticRoutingRecords(routedObject);
+
+			if (HasMessageHandlerRouting)
+				routingTable = routingTable.Concat(GetInterfaceRoutingRecords(routedObject));
+
+
+			return routingTable;
 		}
 
 
@@ -117,9 +136,39 @@ namespace Friday.Base.Routing
 			}
 		}
 
-		private IEnumerable<StaticRoutingTableRecord> GetRoutingRecordsFor(object routedObject)
+
+		private IEnumerable<StaticRoutingTableRecord> GetInterfaceRoutingRecords(object routedObject)
 		{
-			foreach (var apiRoute in routes)
+			var interfaceMethodName = nameof(IMessageHandler<object>.HandleMessage);
+			foreach (var apiRoute in routes.Where(t => t.Options.UseInterfaceMessageRouting))
+			{
+				var processorType = apiRoute.RouteProcesor.GetType();
+
+
+				var allMessageHandlerTypes = processorType
+					.GetInterfaces()
+					.Where(x => x.IsGenericType &&
+
+					(x.GetGenericTypeDefinition() == typeof(IMessageHandler<>) ||
+					x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<>)
+					&& x.GetGenericArguments().First() == routedObject.GetType())
+					);
+
+
+				foreach (var compatibleTypes in allMessageHandlerTypes)
+				{
+					var methodInfo = compatibleTypes.GetMethod(interfaceMethodName);
+
+					if (methodInfo != null)
+						yield return new StaticRoutingTableRecord(apiRoute.RouteProcesor, methodInfo);
+				}
+			}
+		}
+
+
+		private IEnumerable<StaticRoutingTableRecord> GetStaticRoutingRecords(object routedObject)
+		{
+			foreach (var apiRoute in routes.Where(t => t.Options.UseStaticNameRouting))
 			{
 				var processorType = apiRoute.RouteProcesor.GetType();
 
@@ -138,7 +187,7 @@ namespace Friday.Base.Routing
 
 		private static string ExtractMethodName(RouteRule routeRule, object routedObject)
 		{
-			var methodName = routeRule.RouteTemplate;
+			var methodName = routeRule.Options.RouteTemplate;
 			methodName = methodName.Replace("{typeName}", routedObject.GetType().Name);
 			return methodName;
 		}
