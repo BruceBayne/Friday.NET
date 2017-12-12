@@ -39,12 +39,12 @@ namespace Friday.ValueTypes.Tests.Math
         [TestMethod]
         public void CalculateMethodShouldReturnExpectedResults()
         {
-            Percent.Calculate(TestInt, Percent.Ten).Should().Be(TenPercentTestInt);
-            Percent.Calculate(TestNegativeInt, Percent.Ten).Should().Be(-TenPercentTestInt);
-            Percent.Calculate(TestLong, Percent.Ten).Should().Be(TenPercentTestInt);
-            Percent.Calculate(TestNegativeLong, Percent.Ten).Should().Be(-TenPercentTestInt);
-            Percent.Calculate(TestDecimal, Percent.Ten).Should().Be(TenPercentTestDecimal);
-            Percent.Calculate(TestNegativeDecimal, Percent.Ten).Should().Be(-TenPercentTestDecimal);
+            Percent.CalculatePercentAmountFromValue(TestInt, Percent.Ten).Should().Be(TenPercentTestInt);
+            Percent.CalculatePercentAmountFromValue(TestNegativeInt, Percent.Ten).Should().Be(-TenPercentTestInt);
+            Percent.CalculatePercentAmountFromValue(TestLong, Percent.Ten).Should().Be(TenPercentTestInt);
+            Percent.CalculatePercentAmountFromValue(TestNegativeLong, Percent.Ten).Should().Be(-TenPercentTestInt);
+            Percent.CalculatePercentAmountFromValue(TestDecimal, Percent.Ten).Should().Be(TenPercentTestDecimal);
+            Percent.CalculatePercentAmountFromValue(TestNegativeDecimal, Percent.Ten).Should().Be(-TenPercentTestDecimal);
         }
 
         [TestMethod]

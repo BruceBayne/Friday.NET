@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{21095F0C-C3D6-433E-A890-F9EC82BBFB1D}"
 EndProject
@@ -21,7 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Bitcoin.Services", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Autofac.Composition.Tests", "Tests\Friday.Autofac.Composition.Tests\Friday.Autofac.Composition.Tests\Friday.Autofac.Composition.Tests.csproj", "{9E3E99FE-D601-4C63-9ECD-CCFD3F6CF791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Base", "Friday.Base\Friday.Base.csproj", "{7EE1E87C-92E8-441B-9B99-625815E48D76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Friday.Base", "Friday.Base\Friday.Base.csproj", "{7EE1E87C-92E8-441B-9B99-625815E48D76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.ASP", "Friday.ASP\Friday.ASP.csproj", "{C745CB30-E0C5-4F9C-B6F8-02BC0A8E0FBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{7EE1E87C-92E8-441B-9B99-625815E48D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EE1E87C-92E8-441B-9B99-625815E48D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EE1E87C-92E8-441B-9B99-625815E48D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C745CB30-E0C5-4F9C-B6F8-02BC0A8E0FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C745CB30-E0C5-4F9C-B6F8-02BC0A8E0FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C745CB30-E0C5-4F9C-B6F8-02BC0A8E0FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C745CB30-E0C5-4F9C-B6F8-02BC0A8E0FBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
