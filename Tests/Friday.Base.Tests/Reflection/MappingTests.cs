@@ -10,37 +10,44 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Friday.Base.Tests.Reflection
 {
-    [TestClass]
-    [TestCategory("Friday.Base/Mapping")]
-    public class MappingTests
-    {
-        [TestMethod]
-        public void MappingMethodShouldCopyPropertiesAndFieldsToNewDto()
-        {
-            var entity = GetTestEntity();
-            var dto = entity.MapPropertiesWithFieldsTo<TestDto>();
-            dto.Name.Should().Be(entity.Name);
-            dto.Id.Should().Be(entity.Id);
-        }
+	[TestClass]
+	[TestCategory("Friday.Base/Mapping")]
+	public class MappingTests
+	{
+		[TestMethod]
+		public void MappingMethodShouldCopyPropertiesAndFieldsToNewDto()
+		{
+			var entity = GetTestEntity();
+			var dto = entity.MapPropertiesWithFieldsTo<TestDto>();
+			dto.Name.Should().Be(entity.Name);
+			entity.Name.Should().NotBeNullOrEmpty();
 
-        [TestMethod]
-        public void MappingMethodShouldCopyPropertiesAndFieldsToExistingDto()
-        {
-            var entity = GetTestEntity();
-            var dto = GetTestDto();
-            dto = dto.MapPropertiesWithFieldsFrom(entity);
-            dto.Name.Should().Be(entity.Name);
-            dto.Id.Should().Be(entity.Id);
-        }
 
-        private TestEntity GetTestEntity()
-        {
-            return new TestEntity();
-        }
+			dto.Id.Should().Be(entity.Id);
+		}
 
-        private TestDto GetTestDto()
-        {
-            return new TestDto();
-        }
-    }
+		[TestMethod]
+		public void MappingMethodShouldCopyPropertiesAndFieldsToExistingDto()
+		{
+			var entity = GetTestEntity();
+			var dto = GetTestDto();
+			dto = dto.MapPropertiesWithFieldsFrom(entity);
+			entity.Name.Should().NotBeNullOrEmpty();
+			dto.Name.Should().Be(entity.Name);
+			dto.Id.Should().Be(entity.Id);
+		}
+
+
+
+
+		private TestEntity GetTestEntity()
+		{
+			return new TestEntity();
+		}
+
+		private TestDto GetTestDto()
+		{
+			return new TestDto();
+		}
+	}
 }
