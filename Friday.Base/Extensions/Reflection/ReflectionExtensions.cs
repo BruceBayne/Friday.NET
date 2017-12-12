@@ -6,6 +6,12 @@ namespace Friday.Base.Extensions.Reflection
 	public static class ReflectionExtensions
 	{
 
+		public static void MapPropertiesWithFieldsTo(this object source, object destination)
+		{
+			source.CopyProperties(destination);
+			source.CopyFields(destination);
+		}
+
 
 		public static T MapPropertiesWithFieldsFrom<T>(this T source, object destination)
 		{
