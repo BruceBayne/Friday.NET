@@ -150,9 +150,9 @@ namespace Friday.Base.Routing
 					.Where(x => x.IsGenericType &&
 
 					(x.GetGenericTypeDefinition() == typeof(IMessageHandler<>) ||
-					x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<>)
-					&& x.GetGenericArguments().First() == routedObject.GetType())
-					);
+					x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<>))
+					&& x.GetGenericArguments().First() == routedObject.GetType()
+					).ToList();
 
 
 				foreach (var compatibleTypes in allMessageHandlerTypes)

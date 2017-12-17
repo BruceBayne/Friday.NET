@@ -13,6 +13,7 @@ namespace Friday.Base.Tests.Routing
 
 
 
+
 		[TestMethod]
 		public void AsyncInterfaceBasedRoutingShouldWork()
 		{
