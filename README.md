@@ -15,11 +15,15 @@ Lots of extension methods, Routing, and  auxiliary classes useful almost in ever
   
  
  
- # Routing
+# Routing
  
 Useful in network applications with custom protocol messages, when they must be routed to specific processors
+
 Single input, one or more outputs 
 --- 
+
+
+Sample classes
 
 ```c#
 class BaseMessage
@@ -172,7 +176,7 @@ routingProvider.RouteObject(new DerivedMessage()); //Will generate NotAuthorized
 
 # Event Invoker
 ---
- For eample you develop a public API  library with many events
+ For example you develop a public API  library with many events
  
  ```c# 
  class BaseMessage
