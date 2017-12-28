@@ -13,8 +13,9 @@ namespace Friday.Base.Reflection
 		/// </summary>
 		/// <param name="target">Target with EventHandler</param>
 		/// <param name="eventArgument">Invoked Event Argument</param>
-		public static void InvokeEvent(object target, object eventArgument)
+		public static void InvokeAppropriateEvent(object target, object eventArgument)
 		{
+
 			if (eventArgument == null)
 				throw new ArgumentNullException(nameof(eventArgument));
 

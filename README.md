@@ -220,7 +220,7 @@ routingProvider.RouteObject(new DerivedMessage()); //Will generate NotAuthorized
  ```c#
   private void OnMessage(BaseMessage message)
  {
-	 EventUtils.InvokeEvent(this,message); 	   //will find corresponding EventHandler in 'this', and call it.
+	 EventUtils.InvokeAppropriateEvent(this,message); 	   //will find corresponding EventHandler in 'this', and call it.
  } 
  ```
  
