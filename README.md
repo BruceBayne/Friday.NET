@@ -201,6 +201,7 @@ routingProvider.RouteObject(new DerivedMessage()); //Will generate NotAuthorized
  
  Calling of each event can be painful 
  
+ ```c#
  private void OnMessage(BaseMessage msg)
  {
 	 if(message is out var SomeMessage sm)
@@ -208,6 +209,7 @@ routingProvider.RouteObject(new DerivedMessage()); //Will generate NotAuthorized
 	 	 //and for each message type same code	 
  }
  
+ ```
  Offcourse you can generate T4 template for that kind of stuff but...
  
  How about that? 
