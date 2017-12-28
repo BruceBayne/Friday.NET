@@ -19,7 +19,7 @@ Lots of extension methods, Routing, and  auxiliary classes useful almost in ever
  
 Useful in network applications with custom protocol messages, when they must be routed to specific processors
 
-Single input, one or more outputs 
+i.e.  Single input, one or more outputs 
 --- 
 
 
@@ -206,9 +206,9 @@ routingProvider.RouteObject(new DerivedMessage()); //Will generate NotAuthorized
  Calling of each event can be painful 
  
  ```c#
- private void OnMessage(BaseMessage msg)
+ private void OnMessage(BaseMessage message)
  {
-	 if(message is out var SomeMessage sm)
+	 if(message is out SomeMessage sm)
 		 OnSomeMessage?.Invoke(sm);
 	 	 //and for each message type same code	 
  }
@@ -218,9 +218,9 @@ routingProvider.RouteObject(new DerivedMessage()); //Will generate NotAuthorized
  
  How about that? 
  ```c#
-  private void OnMessage(BaseMessage msg)
+  private void OnMessage(BaseMessage message)
  {
-	 EventUtils.InvokeEvent(this,msg); 	   //will find corresponding EventHandler in 'this', and call it.
+	 EventUtils.InvokeEvent(this,message); 	   //will find corresponding EventHandler in 'this', and call it.
  } 
  ```
  
@@ -235,17 +235,14 @@ routingProvider.RouteObject(new DerivedMessage()); //Will generate NotAuthorized
  ```c#
  
 enum Numbers
-		{
-			
-			One,
-			Two,
-			Three
-
-		}
+	{		
+	 One,
+	 Two,
+	 Three
+	}
  
 public void Test()
-	{
-		
+	{		
 		var testEnum = Numbers.One;
 		testEnum = testEnum.Next();  //testEnum now contain Two			
 		testEnum = testEnum.RandomValue(seed:222);  //testEnum now contain Three
@@ -389,8 +386,7 @@ SomeDto dto=new SomeDto();
 entity.MapPropertiesWithFieldsTo(dto); 
  ```
  
- Or even
- 
+ Or even 
  
 ```c#
 SomeDto dto=new SomeDto();
