@@ -1,8 +1,8 @@
-﻿namespace Friday.Base.Routing
+﻿namespace Friday.Base.Routing.Interfaces
 {
-    public interface ICompleteObjectRouter: IObjectRouter, IAsyncObjectRouter
-    {
-        
+	public interface ICompleteObjectRouter : IObjectRouter, IAsyncObjectRouter
+	{
 
-    }
+
+	}
 }

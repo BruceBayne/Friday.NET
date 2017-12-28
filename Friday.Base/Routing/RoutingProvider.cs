@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Friday.Base.Routing.Attributes;
+using Friday.Base.Routing.Interfaces;
 
 namespace Friday.Base.Routing
 {
@@ -66,10 +67,26 @@ namespace Friday.Base.Routing
 		}
 
 
+
+
+		public void RouteObject(object routedObject)
+		{
+			var task = RouteObjectAsync(null, routedObject);
+			task.Wait();
+		}
+
+
+
 		public void RouteObject(IRoutingContext context, object routedObject)
 		{
 			var task = RouteObjectAsync(context, routedObject);
 			task.Wait();
+		}
+
+
+		public async Task RouteObjectAsync(object routedObject)
+		{
+			await RouteObjectAsync(null, routedObject);
 		}
 
 

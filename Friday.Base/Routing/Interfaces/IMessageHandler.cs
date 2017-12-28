@@ -1,4 +1,4 @@
-﻿namespace Friday.Base.Routing
+﻿namespace Friday.Base.Routing.Interfaces
 {
 	/// <summary>
 	/// Used with <see cref="RoutingProvider"/>RoutingProvider,

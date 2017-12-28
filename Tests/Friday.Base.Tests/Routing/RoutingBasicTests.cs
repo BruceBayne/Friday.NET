@@ -1,4 +1,5 @@
 ﻿using Friday.Base.Routing;
+using Friday.Base.Routing.Interfaces;
 using Friday.Base.Tests.Routing.Environment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
