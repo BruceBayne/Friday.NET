@@ -25,8 +25,8 @@ namespace Friday.Base.Routing
 
 		public void RegisterRoute(RouteRule routeRule)
 		{
-			if (routeRule.RouteProcesor == null)
-				throw new ArgumentNullException(nameof(routeRule.RouteProcesor));
+			if (routeRule.RouteProcessor == null)
+				throw new ArgumentNullException(nameof(routeRule.RouteProcessor));
 
 			if (routeRule.Options.UseInterfaceMessageRouting)
 				HasMessageHandlerRouting = true;
@@ -61,7 +61,7 @@ namespace Friday.Base.Routing
 		{
 			foreach (var route in routes)
 			{
-				if (route.RouteProcesor is T result)
+				if (route.RouteProcessor is T result)
 					yield return result;
 			}
 		}
@@ -159,7 +159,7 @@ namespace Friday.Base.Routing
 			var interfaceMethodName = nameof(IMessageHandler<object>.HandleMessage);
 			foreach (var apiRoute in routes.Where(t => t.Options.UseInterfaceMessageRouting))
 			{
-				var processorType = apiRoute.RouteProcesor.GetType();
+				var processorType = apiRoute.RouteProcessor.GetType();
 
 
 				var allMessageHandlerTypes = processorType
@@ -177,7 +177,7 @@ namespace Friday.Base.Routing
 					var methodInfo = compatibleTypes.GetMethod(interfaceMethodName);
 
 					if (methodInfo != null)
-						yield return new StaticRoutingTableRecord(apiRoute.RouteProcesor, methodInfo);
+						yield return new StaticRoutingTableRecord(apiRoute.RouteProcessor, methodInfo);
 				}
 			}
 		}
@@ -187,7 +187,7 @@ namespace Friday.Base.Routing
 		{
 			foreach (var apiRoute in routes.Where(t => t.Options.UseStaticNameRouting))
 			{
-				var processorType = apiRoute.RouteProcesor.GetType();
+				var processorType = apiRoute.RouteProcessor.GetType();
 
 				var methodName = ExtractMethodName(apiRoute, routedObject);
 
@@ -195,7 +195,7 @@ namespace Friday.Base.Routing
 				if (methodInfo == null)
 					continue;
 
-				yield return new StaticRoutingTableRecord(apiRoute.RouteProcesor, methodInfo);
+				yield return new StaticRoutingTableRecord(apiRoute.RouteProcessor, methodInfo);
 
 				if (apiRoute.Options.ProcessingBehavior == RouteProcessingBehavior.BreakAfterFirstMatch)
 					yield break;

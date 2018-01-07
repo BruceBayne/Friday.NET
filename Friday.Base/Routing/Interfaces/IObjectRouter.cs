@@ -6,7 +6,6 @@ namespace Friday.Base.Routing.Interfaces
 	{
 		void RouteCall<T>(Action<T> callAction) where T : class;
 		void RouteObject(IRoutingContext context, object routedObject);
-
-
+		void RouteObject(object routedObject);
 	}
 }

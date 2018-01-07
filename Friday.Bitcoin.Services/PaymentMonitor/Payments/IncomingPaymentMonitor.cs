@@ -16,6 +16,7 @@ namespace Friday.Bitcoin.Services.PaymentMonitor.Payments
 		private Task task;
 		public event EventHandler<MoneyEventInfo> OnAmountChanged;
 		public event EventHandler OnNewCheckCycleStarted;
+		public event EventHandler OnCycleCheckFinished;
 
 		public event EventHandler<Exception> OnException;
 
@@ -65,7 +66,9 @@ namespace Friday.Bitcoin.Services.PaymentMonitor.Payments
 					try
 					{
 						await CheckChanges().ConfigureAwait(false);
+						OnCycleCheckFinished?.Invoke(this, EventArgs.Empty);
 						await Task.Delay(settings.RefreshInterval, CancellationToken).ConfigureAwait(false);
+
 					}
 					catch (Exception e)
 					{
@@ -96,16 +99,19 @@ namespace Friday.Bitcoin.Services.PaymentMonitor.Payments
 
 				var monitorUntilTxid = monitoringElement.Until.TransactionId;
 				var oldToNewOperations = balance.Operations.Where(t => t.ReceivedCoins != null).ToList();
+
+				if (oldToNewOperations.Count == 0)
+					continue;
+
 				oldToNewOperations.Reverse();
+				if (monitorUntilTxid != uint256.Zero && oldToNewOperations.Exists(x => x.TransactionId == monitorUntilTxid))
+				{
+					oldToNewOperations = oldToNewOperations.SkipWhile(x => x.TransactionId != monitorUntilTxid).ToList();
+					oldToNewOperations.RemoveAll(x => x.TransactionId == monitorUntilTxid);
+				}
 
 				foreach (var operation in oldToNewOperations)
 				{
-					var noNewOperations = operation.TransactionId == monitorUntilTxid;
-
-					if (noNewOperations)
-						break;
-
-
 					if (operation.Confirmations < settings.MinConfirmations)
 					{
 						continue;

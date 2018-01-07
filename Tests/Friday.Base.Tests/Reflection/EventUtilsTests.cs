@@ -26,7 +26,7 @@ namespace Friday.Base.Tests.Reflection
 			e.OnString += (sender, s) => counter++;
 			e.OnString += (sender, s) => counter++;
 
-			EventUtils.InvokeEvent(e, string.Empty);
+			EventUtils.InvokeAppropriateEvent(e, string.Empty);
 
 			//Unfortunately FluentAssertions MonitorEvent/ShouldRaise Methods make this test fail
 			counter.Should().Be(2);

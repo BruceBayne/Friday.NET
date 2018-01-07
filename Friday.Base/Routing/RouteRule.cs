@@ -6,25 +6,30 @@
 
 		public override string ToString()
 		{
-			return $"{nameof(RouteProcesor)}: {RouteProcesor.GetType().Name}, {nameof(Options)}: {Options}";
+			return $"{nameof(RouteProcessor)}: {RouteProcessor.GetType().Name}, {nameof(Options)}: {Options}";
 		}
 
 
-		public readonly object RouteProcesor;
+		public static RouteRule UseInterfaceMessageHandler(object processor)
+		{
+			return new RouteRule(processor, RouteOptions.UseInterfaceMessageHandler());
+		}
+
+		public readonly object RouteProcessor;
 		public readonly string RouteName;
 
 
 		public RouteRule(object processor, RouteOptions options)
 		{
 			RouteName = processor.GetType().Name;
-			RouteProcesor = processor;
+			RouteProcessor = processor;
 			Options = options;
 		}
 
 		public RouteRule(object processor, RouteOptions options, string routeName)
 		{
 			RouteName = routeName;
-			RouteProcesor = processor;
+			RouteProcessor = processor;
 			Options = options;
 		}
 	}
