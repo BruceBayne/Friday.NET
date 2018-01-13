@@ -5,7 +5,7 @@ namespace Friday.Base.Routing.Interfaces
 	public interface IObjectRouter
 	{
 		void RouteCall<T>(Action<T> callAction) where T : class;
-		void RouteObject(IRoutingContext context, object routedObject);
-		void RouteObject(object routedObject);
+		void RouteObject(object context, object objectForRoute);
+		void RouteObject(object objectForRoute);
 	}
 }

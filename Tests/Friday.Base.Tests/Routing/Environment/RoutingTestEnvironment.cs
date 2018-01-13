@@ -11,19 +11,9 @@ namespace Friday.Base.Tests.Routing.Environment
 		}
 
 
-		internal static (RoutingProvider provider, AuthRequiredApiProcessor processor) GetAuthProviderWithProcessor()
-		{
-			var processor = new AuthRequiredApiProcessor();
-			var provider = GetStaticNamesRoutingProvider(processor);
-			provider.RegisterAttributeHandler(new AuthRequiredAttributeHandler());
-			return (provider, processor);
-		}
 
 
-		internal static RoutingProvider GetAuthProvider()
-		{
-			return GetAuthProviderWithProcessor().provider;
-		}
+
 
 
 		internal static RoutingProvider GetInterfaceBasedRoutingProvider(params object[] processors)

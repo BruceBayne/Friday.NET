@@ -19,12 +19,20 @@ namespace Friday.Base.Tests.Routing
 			var dto = RoutingTestEnvironment.GetTestDtoData();
 
 			//Act
-			routingProvider.RouteObject(Substitute.For<IRoutingContext>(), dto);
+			routingProvider.RouteObject(new object(), dto);
 
 
 			//Assert
 			processor.Received().OnSomeDto(dto);
 		}
+
+
+
+
+
+
+
+
 
 
 		[TestMethod]
@@ -39,7 +47,7 @@ namespace Friday.Base.Tests.Routing
 			var dto = RoutingTestEnvironment.GetTestDtoData();
 
 			//Act
-			routingProvider.RouteObject(Substitute.For<IRoutingContext>(), dto);
+			routingProvider.RouteObject(new object(), dto);
 
 			//Assert
 			processor.Received().OnSomeDto(dto);

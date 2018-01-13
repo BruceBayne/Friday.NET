@@ -67,17 +67,14 @@ namespace Friday.Base.Routing
 		}
 
 
-
-
-		public void RouteObject(object routedObject)
+		public void RouteObject(object objectForRoute)
 		{
-			var task = RouteObjectAsync(null, routedObject);
+			var task = RouteObjectAsync(null, objectForRoute);
 			task.Wait();
 		}
 
 
-
-		public void RouteObject(IRoutingContext context, object routedObject)
+		public void RouteObject(object context, object routedObject)
 		{
 			var task = RouteObjectAsync(context, routedObject);
 			task.Wait();
@@ -90,7 +87,7 @@ namespace Friday.Base.Routing
 		}
 
 
-		public async Task RouteObjectAsync(IRoutingContext context, object routedObject)
+		public async Task RouteObjectAsync(object context, object routedObject)
 		{
 			var routingTable = GetSuitableRoutingRecords(routedObject);
 			foreach (var record in routingTable)
@@ -140,6 +137,7 @@ namespace Friday.Base.Routing
 			var routeRecord = objectToRoute.RouteRecord;
 			var methodArguments = ProvideMethodArguments(objectToRoute);
 
+
 			var result = routeRecord.SelectedMethod?.Invoke(routeRecord.Processor, methodArguments);
 			if (result is Task t)
 				await t;
@@ -164,12 +162,9 @@ namespace Friday.Base.Routing
 
 				var allMessageHandlerTypes = processorType
 					.GetInterfaces()
-					.Where(x => x.IsGenericType &&
-
-					(x.GetGenericTypeDefinition() == typeof(IMessageHandler<>) ||
-					x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<>))
-					&& x.GetGenericArguments().First() == routedObject.GetType()
-					).ToList();
+					.Where(TypeIsMessageHandler)
+					.Where(x => HandlerCanProcessObject(routedObject, x))
+					.ToList();
 
 
 				foreach (var compatibleTypes in allMessageHandlerTypes)
@@ -180,6 +175,21 @@ namespace Friday.Base.Routing
 						yield return new StaticRoutingTableRecord(apiRoute.RouteProcessor, methodInfo);
 				}
 			}
+		}
+
+		private static bool HandlerCanProcessObject(object routedObject, Type x)
+		{
+			return x.GetGenericArguments().First() == routedObject.GetType() ||
+				   x.GetGenericArguments().Length == 2 && x.GetGenericArguments()[1] == routedObject.GetType();
+		}
+
+		private static bool TypeIsMessageHandler(Type x)
+		{
+			return x.IsGenericType &&
+				   (
+					   x.GetGenericTypeDefinition() == typeof(IMessageHandler<>) ||
+					   x.GetGenericTypeDefinition() == typeof(IMessageHandler<,>) ||
+					   x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<>));
 		}
 
 

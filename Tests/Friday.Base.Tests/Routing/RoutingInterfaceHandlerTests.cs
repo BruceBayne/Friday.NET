@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using Friday.Base.Routing;
-using Friday.Base.Routing.Interfaces;
+﻿using Friday.Base.Routing.Interfaces;
 using Friday.Base.Tests.Routing.Environment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
@@ -11,8 +9,33 @@ namespace Friday.Base.Tests.Routing
 	[TestCategory("Routing/InterfaceBased")]
 	public class RoutingInterfaceHandlerTests
 	{
+		[TestMethod]
+		public void SimpleInterfaceRoutingWithContextShouldWork2()
+		{
+			var processor = Substitute.For<ComplexInterface>();
+			var router = RoutingTestEnvironment.GetInterfaceBasedRoutingProvider(processor);
+			var routedObject = RoutingTestEnvironment.GetTestDtoData();
+			var context = new SomeContext();
+			router.RouteObject(context, routedObject);
+
+			processor.Received().HandleMessage(context, routedObject);
+			processor.Received().HandleMessage(routedObject, context);
+			processor.Received().HandleMessage(routedObject);
+			processor.Received().HandleMessage(routedObject, routedObject);
+			processor.DidNotReceive().HandleMessage(context, context);
+		}
 
 
+		[TestMethod]
+		public void SimpleInterfaceRoutingWithContextShouldWork()
+		{
+			var processor = Substitute.For<IMessageHandler<SomeContext, SomeDto>>();
+			var router = RoutingTestEnvironment.GetInterfaceBasedRoutingProvider(processor);
+			var routedObject = RoutingTestEnvironment.GetTestDtoData();
+			var context = new SomeContext();
+			router.RouteObject(context, routedObject);
+			processor.Received().HandleMessage(context, routedObject);
+		}
 
 
 		[TestMethod]
@@ -25,8 +48,6 @@ namespace Friday.Base.Tests.Routing
 			router.RouteObject(null, routedObject);
 			processor.Received().HandleMessage(routedObject);
 		}
-
-
 
 
 		[TestMethod]
