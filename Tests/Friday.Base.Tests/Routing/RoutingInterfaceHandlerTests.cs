@@ -19,9 +19,11 @@ namespace Friday.Base.Tests.Routing
 			router.RouteObject(context, routedObject);
 
 			processor.Received().HandleMessage(context, routedObject);
-			processor.Received().HandleMessage(routedObject, context);
 			processor.Received().HandleMessage(routedObject);
-			processor.Received().HandleMessage(routedObject, routedObject);
+
+
+			processor.DidNotReceive().HandleMessage(routedObject, routedObject);
+			processor.DidNotReceive().HandleMessage(routedObject, context);
 			processor.DidNotReceive().HandleMessage(context, context);
 		}
 

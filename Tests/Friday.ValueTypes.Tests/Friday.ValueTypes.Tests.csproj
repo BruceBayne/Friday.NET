@@ -62,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Friday.Base\Friday.Base.csproj">
+      <Project>{7EE1E87C-92E8-441B-9B99-625815E48D76}</Project>
+      <Name>Friday.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Friday.ValueTypes\Friday.ValueTypes.csproj">
       <Project>{8F968258-FCB6-48F5-A269-8A432D4F5F30}</Project>
       <Name>Friday.ValueTypes</Name>

@@ -10,6 +10,65 @@ namespace Friday.Base.Tests.Routing
 	[TestCategory("Routing")]
 	public class RoutingBasicTests
 	{
+		class Context : ISessionStarted
+		{
+			public void SessionStarted()
+			{
+			}
+		}
+
+		class MessageBase
+		{
+		}
+
+		class MessageDerived : MessageBase
+		{
+		}
+
+		interface ISessionStarted
+		{
+			void SessionStarted();
+		}
+
+
+		class Handler : ISessionStarted, IMessageHandler<ISessionStarted, MessageBase>, IMessageHandler<int>
+		{
+			public void SessionStarted()
+			{
+			}
+
+
+			public void HandleMessage(ISessionStarted sender, MessageBase message)
+			{
+			}
+
+			public void HandleMessage(int message)
+			{
+
+			}
+		}
+
+
+		[TestMethod]
+		public void Foo()
+		{
+			var m = new MessageDerived();
+
+			var rp = new RoutingProvider();
+			rp.RegisterRoute(RouteRule.UseInterfaceMessageHandler(new Handler()));
+
+			//rp.RouteCall<ISessionStarted>(x => x.SessionStarted());
+			rp.RouteObject(m);
+			rp.RouteObject(11);
+			rp.RouteObject(11L);
+
+
+			//var t = new List<string>();
+			//List<object> l= (List<object>)t;
+			//rp.RouteObject(new Context(), m);
+		}
+
+
 		[TestMethod]
 		public void SimplestStaticRoutingCallShouldWork()
 		{
@@ -27,18 +86,9 @@ namespace Friday.Base.Tests.Routing
 		}
 
 
-
-
-
-
-
-
-
-
 		[TestMethod]
 		public void RoutingObjectShouldBeForAllProcessorsByDefault()
 		{
-
 			//Arrange
 			var processor = Substitute.For<ISomeApiProcessor>();
 			var processor2 = Substitute.For<ISomeApiProcessor>();
@@ -57,7 +107,6 @@ namespace Friday.Base.Tests.Routing
 		[TestMethod]
 		public void DirectInterfaceMethodCallShouldWork()
 		{
-
 			//Arrange
 			var processor = Substitute.For<ISomeSessionProcessor>();
 			var routingProvider = RoutingTestEnvironment.GetStaticNamesRoutingProvider(processor);
@@ -69,8 +118,5 @@ namespace Friday.Base.Tests.Routing
 			//Assert
 			processor.Received().OnSessionClosed();
 		}
-
-
-
 	}
 }

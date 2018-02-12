@@ -1,8 +1,8 @@
 ﻿namespace Friday.Base.Serialization
 {
-    public interface ICompleteSerializer : ISerializer , IDeserializer
-    {
-        
+	public interface ICompleteSerializer : ISerializer, IDeserializer
+	{
 
-    }
+
+	}
 }

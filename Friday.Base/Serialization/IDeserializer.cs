@@ -2,9 +2,9 @@
 
 namespace Friday.Base.Serialization
 {
-    public interface IDeserializer
-    {
-        object Deserialize(byte[] buffer, Type type);
-        T Deserialize<T>(byte[] buffer);
-    }
+	public interface IDeserializer
+	{
+		object Deserialize(byte[] buffer, Type type);
+		T Deserialize<T>(byte[] buffer);
+	}
 }

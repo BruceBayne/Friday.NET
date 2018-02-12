@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Friday.Base.ValueTypes;
 using Friday.ValueTypes.Currencies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

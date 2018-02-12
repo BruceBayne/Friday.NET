@@ -89,7 +89,7 @@ namespace Friday.Base.Routing
 
 		public async Task RouteObjectAsync(object context, object routedObject)
 		{
-			var routingTable = GetSuitableRoutingRecords(routedObject);
+			var routingTable = GetSuitableRoutingRecords(context, routedObject);
 			foreach (var record in routingTable)
 			{
 				var p = new ObjectToRoute(context, routedObject, record);
@@ -97,12 +97,12 @@ namespace Friday.Base.Routing
 			}
 		}
 
-		private IEnumerable<StaticRoutingTableRecord> GetSuitableRoutingRecords(object routedObject)
+		private IEnumerable<StaticRoutingTableRecord> GetSuitableRoutingRecords(object context, object routedObject)
 		{
 			var routingTable = GetStaticRoutingRecords(routedObject);
 
 			if (HasMessageHandlerRouting)
-				routingTable = routingTable.Concat(GetInterfaceRoutingRecords(routedObject));
+				routingTable = routingTable.Concat(GetInterfaceRoutingRecords(context, routedObject));
 
 
 			return routingTable;
@@ -152,7 +152,7 @@ namespace Friday.Base.Routing
 		}
 
 
-		private IEnumerable<StaticRoutingTableRecord> GetInterfaceRoutingRecords(object routedObject)
+		private IEnumerable<StaticRoutingTableRecord> GetInterfaceRoutingRecords(object context, object routedObject)
 		{
 			var interfaceMethodName = nameof(IMessageHandler<object>.HandleMessage);
 			foreach (var apiRoute in routes.Where(t => t.Options.UseInterfaceMessageRouting))
@@ -163,7 +163,7 @@ namespace Friday.Base.Routing
 				var allMessageHandlerTypes = processorType
 					.GetInterfaces()
 					.Where(TypeIsMessageHandler)
-					.Where(x => HandlerCanProcessObject(routedObject, x))
+					.Where(x => TypeHandlerCompatibleTo(x, context, routedObject))
 					.ToList();
 
 
@@ -177,10 +177,38 @@ namespace Friday.Base.Routing
 			}
 		}
 
-		private static bool HandlerCanProcessObject(object routedObject, Type x)
+
+
+		private static bool IsTypeCompatibleTo(Type t, params object[] x)
 		{
-			return x.GetGenericArguments().First() == routedObject.GetType() ||
-				   x.GetGenericArguments().Length == 2 && x.GetGenericArguments()[1] == routedObject.GetType();
+			return x.Any(t.IsInstanceOfType);
+		}
+
+		private static bool TypeHandlerCompatibleTo(Type x, object context, object routedObject)
+		{
+
+			var genericArgCount = x.GetGenericArguments().Length;
+
+			if (genericArgCount != 1 && genericArgCount != 2)
+				return false;
+
+			var firstGenericType = x.GetGenericArguments()[0];
+
+
+			switch (genericArgCount)
+			{
+				case 1:
+					return IsTypeCompatibleTo(firstGenericType, routedObject);
+				case 2:
+					var secondGenericType = x.GetGenericArguments()[1];
+
+					var isCompatibleContextMessageHandler =
+						IsTypeCompatibleTo(firstGenericType, context) &&
+						IsTypeCompatibleTo(secondGenericType, routedObject);
+					return isCompatibleContextMessageHandler;
+			}
+
+			return false;
 		}
 
 		private static bool TypeIsMessageHandler(Type x)
