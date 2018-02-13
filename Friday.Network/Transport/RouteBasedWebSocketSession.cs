@@ -71,7 +71,8 @@ namespace Friday.Network.Transport
 			RoutingContext = authService.LoadContext(signInMessage);
 			Send(GetAuthSuccessMessage(signInMessage));
 			RoutingContext.OnMessageAvailable += RouterOnMessageAvailable;
-			RoutingContext.Start();
+
+		    RoutingContext.Start();
 		}
 
 		protected virtual void RouterOnMessageAvailable(object sender, TServerMessage message)

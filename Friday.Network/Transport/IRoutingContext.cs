@@ -4,10 +4,12 @@ using Friday.Base.Routing.Interfaces;
 
 namespace Friday.Network.Transport
 {
-	public interface IRoutingContext<TServerMessageBase> : IStartableMarker, IObjectRouter
+	public interface IRoutingContext<TServerMessageBase> :  IObjectRouter
 	{
 		
 		event EventHandler<TServerMessageBase> OnMessageAvailable;
-		void Dispose();
+
+	    void Start();
+	    void Dispose();
 	}
 }
