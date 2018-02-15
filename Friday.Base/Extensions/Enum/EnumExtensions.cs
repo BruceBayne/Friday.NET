@@ -51,9 +51,7 @@ namespace Friday.Base.Extensions.Enum
         {
             foreach (var value in System.Enum.GetValues(flags.GetType()).Cast<System.Enum>())
             {
-                ulong num = Convert.ToUInt64(value);
-
-                var hasFlag = ((Convert.ToUInt64(flags) & num) == num);
+                var hasFlag = flags.HasFlag(value);
 
                 if (hasFlag)
                     yield return value;
