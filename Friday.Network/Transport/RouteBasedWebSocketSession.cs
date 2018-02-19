@@ -14,10 +14,10 @@ namespace Friday.Network.Transport
 
 	{
 		private readonly IAuthService<TSignInMessage, TServerMessage> authService;
-		protected IPrincipal Principal { get; private set; }
+		
 
 		protected IRoutingContext<TServerMessage> RoutingContext { get; private set; }
-		protected bool IsAuthenticated => Principal != null;
+		protected bool IsAuthenticated => RoutingContext != null;
 
 		protected RouteBasedWebSocketSession(ICompleteReadableSerializer serializer,
 			IAuthService<TSignInMessage, TServerMessage> authService) :
@@ -47,8 +47,7 @@ namespace Friday.Network.Transport
 				RoutingContext.OnMessageAvailable -= RouterOnMessageAvailable;
 				RoutingContext.Dispose();
 			}
-
-			Principal = null;
+            RoutingContext = null;
 		}
 
 		protected sealed override void ProcessMessage(TClientMessage message)

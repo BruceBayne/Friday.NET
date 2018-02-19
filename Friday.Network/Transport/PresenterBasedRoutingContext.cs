@@ -5,18 +5,16 @@ using Friday.Base;
 
 namespace Friday.Network.Transport
 {
-    public abstract class PresenterBasedRoutingContext<TPresenter, TServerMessageBase> : AbstractRoutingProvider, IDisposable, IRoutingContext<TServerMessageBase>
+    public abstract class PresenterBasedRoutingContext<TPresenter, TServerMessageBase> : AbstractRoutingProvider,
+        IDisposable, IRoutingContext<TServerMessageBase>
         where TPresenter : class, IBasicPresenter<TServerMessageBase>
     {
-        private readonly IReadOnlyCollection<IStartableMarker> startables;
         private readonly IReadOnlyCollection<TPresenter> presenters;
         public event EventHandler<TServerMessageBase> OnMessageAvailable;
 
-        
 
-        protected PresenterBasedRoutingContext(IReadOnlyCollection<TPresenter> presenters, IReadOnlyCollection<IStartableMarker> startables)
+        protected PresenterBasedRoutingContext(IReadOnlyCollection<TPresenter> presenters)
         {
-            this.startables = startables;
             this.presenters = presenters.ToList();
             RegisterRoutes(presenters);
         }
@@ -35,23 +33,24 @@ namespace Friday.Network.Transport
 
         public void Dispose()
         {
-            CleanupSubscriptions();
+            DisposePresenters();
         }
 
-        private void CleanupSubscriptions()
+        private void DisposePresenters()
         {
             foreach (var presenter in presenters)
+            {
                 presenter.OnPresenterChanged -= WebPresenterMarkerOnOnPresenterChanged;
+                presenter.Dispose();
+            }
         }
 
         public void Start()
         {
-            foreach (var startableMarker in startables)
-                startableMarker.Start();
-            
-
             foreach (var webPresenterMarker in presenters)
             {
+                webPresenterMarker.Start();
+
                 var presentation = webPresenterMarker.GetPresentation();
                 DoMessageAvailable(presentation);
                 webPresenterMarker.OnPresenterChanged += WebPresenterMarkerOnOnPresenterChanged;
