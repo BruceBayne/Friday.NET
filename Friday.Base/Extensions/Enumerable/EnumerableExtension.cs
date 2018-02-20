@@ -8,13 +8,14 @@ namespace Friday.Base.Extensions.Enumerable
 	public static class EnumerableExtension
 	{
 
-	    public static bool IsEmpty<T>(this IEnumerable<T> source)
-	    {
-	        return !source.Any();
-	    }
+		public static bool IsEmpty<T>(this IEnumerable<T> source)
+		{
+			return !source.Any();
+		}
 
 
-        public static T TakeRandom<T>(this IEnumerable<T> source)
+
+		public static T TakeRandom<T>(this IEnumerable<T> source)
 		{
 			return source.TakeRandom(1).FirstOrDefault();
 		}

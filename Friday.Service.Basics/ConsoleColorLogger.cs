@@ -2,6 +2,7 @@
 using System.Drawing;
 using Colorful;
 using Friday.Base.Logging;
+using Friday.Base.Regexp;
 using Console = Colorful.Console;
 
 
@@ -9,44 +10,67 @@ namespace Friday.Service.Basics
 {
 	public class ConsoleColorLogger : BaseLogger
 	{
-		protected virtual string FormatMsg(string msg)
+		private readonly StyleSheet styleSheet;
+
+		public void ClearStyles()
 		{
-			var dtTime = DateTime.Now.ToString("hh:mm:ss.fff");
-			return $"{dtTime} {msg}";
+			styleSheet.Styles.Clear();
 		}
 
-		protected readonly StyleSheet styleSheet;
-
-		public ConsoleColorLogger(StyleSheet styleSheet)
+		public void AddStyle(string regexp, Color color)
 		{
-			this.styleSheet = styleSheet;
+			styleSheet.AddStyle(regexp, color);
+		}
+
+
+		public ConsoleColorLogger()
+		{
+			styleSheet = new StyleSheet(Color.BurlyWood);
+			styleSheet.AddStyle("exception", Color.Red);
+
+			styleSheet.AddStyle("\\s\\d+\\s", Color.Yellow);
+			styleSheet.AddStyle("warn", Color.Gold);
+			styleSheet.AddStyle("offline", Color.Red);
+			styleSheet.AddStyle("online", Color.Green);
+			styleSheet.AddStyle("connect", Color.Green);
+
+			var slashSeparated = "\\w?\\w?\\w\\w\\w\\/\\w?\\w?\\w\\w\\w";
+			styleSheet.AddStyle(slashSeparated, Color.HotPink);
+
+
+			var timeRegex = "\\d\\d:\\d\\d:\\d\\d";
+			var dateRegexp = "(\\d+)[-.\\/](\\d+)[-.\\/](\\d+)";
+			styleSheet.AddStyle(timeRegex, Color.Pink);
+			styleSheet.AddStyle(dateRegexp, Color.DarkTurquoise);
+
+
+			styleSheet.AddStyle(RegularExpressions.IpV4AddressPattern, Color.AntiqueWhite);
 		}
 
 
 		public override void Log(LogLevel level, string message)
 		{
-
-			if (level == LogLevel.Trace)
-				Console.WriteLineStyled(styleSheet, FormatMsg(message));
-
-			if (level == LogLevel.Debug)
-				Console.WriteLine(FormatMsg(message), Color.Gray);
-
-
-			if (level == LogLevel.Information)
-				Console.WriteLine(FormatMsg(message), Color.DodgerBlue);
-
-
 			if (level == LogLevel.Error || level == LogLevel.Critical)
-				Console.WriteLine(FormatMsg(message), Color.Red);
+			{
+				Console.WriteLine(FormatLogLine(message), Color.Red);
+				return;
+			}
 
 			if (level == LogLevel.Warning)
-				Console.WriteLine(FormatMsg(message), Color.Gold);
+			{
+				Console.WriteLine(FormatLogLine(message), Color.Gold);
+				return;
+			}
+
+
+			var formatMsg = FormatLogLine($"{level} / {message}");
+
+			Console.WriteLineStyled(styleSheet, formatMsg);
+
+
+			//base
 
 			base.Log(level, message);
-
 		}
-
-
 	}
 }

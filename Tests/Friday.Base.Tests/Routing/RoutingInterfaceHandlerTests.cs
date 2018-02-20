@@ -28,6 +28,22 @@ namespace Friday.Base.Tests.Routing
 		}
 
 
+
+		[TestMethod]
+		public void AsyncRoutingWithContextObjectShouldWork()
+		{
+			var processor = Substitute.For<IMessageHandlerAsync<SomeContext, SomeDto>>();
+			var router = RoutingTestEnvironment.GetInterfaceBasedRoutingProvider(processor);
+			var routedObject = RoutingTestEnvironment.GetTestDtoData();
+			var context = new SomeContext();
+			router.RouteObject(context, routedObject);
+			processor.Received().HandleMessage(context, routedObject);
+		}
+
+
+
+
+
 		[TestMethod]
 		public void SimpleInterfaceRoutingWithContextShouldWork()
 		{

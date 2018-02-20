@@ -81,9 +81,9 @@ namespace Friday.Base.Routing
 		}
 
 
-		public async Task RouteObjectAsync(object routedObject)
+		public  Task RouteObjectAsync(object routedObject)
 		{
-			await RouteObjectAsync(null, routedObject);
+			return RouteObjectAsync(null, routedObject);
 		}
 
 

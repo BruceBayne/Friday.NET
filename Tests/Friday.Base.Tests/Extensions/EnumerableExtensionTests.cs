@@ -7,6 +7,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Friday.Base.Tests.Extensions
 {
+	public class ExtensionTestEnvironment
+	{
+
+	}
+
 	[TestClass]
 	[TestCategory("Friday.Base/Extensions")]
 	public class EnumerableExtensionTests
@@ -33,6 +38,19 @@ namespace Friday.Base.Tests.Extensions
 			var y = new List<int> { 1, 2, 5, 4 };
 			var i = x.SymmetricExcept(y).First();
 			Assert.IsTrue(i == 5);
+		}
+
+
+
+
+		[TestMethod]
+		public void ExceptExtensionShouldWork()
+		{
+			var x = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+			var x2 = new List<int> { 1, 2, 3, 4, 5, 6, };
+			var chunkCount = x.Except(x2);
+			chunkCount.Should().BeEmpty();
+
 		}
 
 
