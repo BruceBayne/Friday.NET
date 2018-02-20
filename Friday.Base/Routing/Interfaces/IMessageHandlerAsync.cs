@@ -9,6 +9,6 @@ namespace Friday.Base.Routing.Interfaces
 	/// <typeparam name="T">MessageType to pass</typeparam>
 	public interface IMessageHandlerAsync<in T>
 	{
-		Task HandleMessage(T message);
+		Task HandleMessage(T request);
 	}
 }
