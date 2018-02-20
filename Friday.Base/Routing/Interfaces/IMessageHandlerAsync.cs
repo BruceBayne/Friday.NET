@@ -6,23 +6,9 @@ namespace Friday.Base.Routing.Interfaces
 	/// Used with <see cref="RoutingProvider"/>RoutingProvider,
 	/// specifies messages that provider can pass to target
 	/// </summary>
-	/// <typeparam name="TMessage">MessageType to pass</typeparam>
-	public interface IMessageHandlerAsync<in TMessage>
+	/// <typeparam name="T">MessageType to pass</typeparam>
+	public interface IMessageHandlerAsync<in T>
 	{
-		Task HandleMessage(TMessage message);
+		Task HandleMessage(T request);
 	}
-
-
-	/// <summary>
-	/// Used with <see cref="RoutingProvider"/>RoutingProvider,
-	/// specifies messages that provider can pass to target
-	/// </summary>
-	/// <typeparam name="TMessage">MessageType to pass</typeparam>
-	/// <typeparam name="TContext">Context</typeparam>
-	public interface IMessageHandlerAsync<in TContext, in TMessage>
-	{
-		Task HandleMessage(TContext context, TMessage message);
-	}
-
-
 }

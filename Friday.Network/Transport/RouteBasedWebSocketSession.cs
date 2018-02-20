@@ -86,11 +86,24 @@ namespace Friday.Network.Transport
 				CloseSession();
 				return;
 			}
+
+		    MessageReadyToBeRouted(message);
 			RoutingContext?.RouteObject(this, message);
+		    MessageRoutedSuccessfully(message);
 		}
 
+	    protected virtual void MessageReadyToBeRouted(TClientMessage message)
+	    {
 
-		public void Dispose()
+	    }
+
+        protected virtual void MessageRoutedSuccessfully(TClientMessage message)
+	    {
+	        
+	    }
+
+
+	    public void Dispose()
 		{
 			Cleanup();
 		}
