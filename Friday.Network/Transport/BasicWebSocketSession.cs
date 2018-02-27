@@ -13,10 +13,10 @@ namespace Friday.Network.Transport
 		{
 			try
 			{
-				if (e.IsText)
+				if (e.Type==Opcode.Text)
 					ProcessTextMessage(e.Data);
 
-				if (e.IsBinary)
+				if (e.Type==Opcode.Binary)
 					ProcessBinaryMessage(e.RawData);
 			}
 
