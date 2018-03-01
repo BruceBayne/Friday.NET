@@ -9,7 +9,8 @@ namespace Friday.Base.Comparers
         readonly Func<T, int> hash;
 
         public FuncEqualityComparer(Func<T, T, bool> comparer)
-            : this(comparer, t => 0) // NB Cannot assume anything about how e.g., t.GetHashCode() interacts with the comparer's behavior
+            : this(comparer,
+                t => 0) // NB Cannot assume anything about how e.g., t.GetHashCode() interacts with the comparer's behavior
         {
         }
 
@@ -17,6 +18,11 @@ namespace Friday.Base.Comparers
         {
             this.comparer = comparer;
             this.hash = hash;
+        }
+
+        public static IEqualityComparer<T> Create(Func<T, T, bool> comparer)
+        {
+            return new FuncEqualityComparer<T>(comparer);
         }
 
         public bool Equals(T x, T y)
