@@ -15,7 +15,7 @@ namespace Friday.Base.Logging
 
 		public static string FormatLogLine(string line)
 		{
-			var dtTime = DateTime.Now.ToString("hh.mm.ss.fff");
+			var dtTime = DateTime.Now.ToString("hh:mm:ss.fff");
 			return $"{dtTime} {line}";
 		}
 

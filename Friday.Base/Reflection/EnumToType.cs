@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Friday.Base.Network;
 
-namespace Friday.Base.Network
+namespace Friday.Base.Reflection
 {
-
-
-
-
-
-
-	public class EnumToType<TEnum, TBasicType> where TBasicType : IMessageType<TEnum>
+	public sealed class EnumToType<TEnum, TBasicType> where TBasicType : IMessageType<TEnum>
 	{
 		private static readonly Dictionary<TEnum, Type> Cache = new Dictionary<TEnum, Type>();
 
 		public bool HasAppropriateTypeFor(TEnum e)
 		{
 			return Cache.ContainsKey(e);
-
 		}
 
 
 		public Type GetType(TEnum e)
 		{
-			if (Cache.ContainsKey(e))
+			if (HasAppropriateTypeFor(e))
 			{
 				return Cache[e];
 			}

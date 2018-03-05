@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Friday.Base.Extensions.Enumerable
 {
-	public static partial class Enumerable
+	public static class FridayEnumerable
 	{
 		public static IEnumerable<char> Range(char firstLetter, char lastLetter)
 		{

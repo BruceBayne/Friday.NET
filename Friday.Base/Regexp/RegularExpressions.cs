@@ -11,6 +11,9 @@ namespace Friday.Base.Regexp
 			;
 		public const string IpV4AddressPattern = "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
 		public const string Time_HH_MM_SS_SeparatedByColonPattern = "\\d\\d:\\d\\d:\\d\\d";
+		public const string HttpFtpUrlPattern = "(?:(?:(?:ftp)|(?:https?)):\\/\\/[\\w.\\-/]+)|(?:[\\w.-]+?.\\/[\\w.\\-%?]*)";
+
+
 
 
 

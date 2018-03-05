@@ -33,14 +33,14 @@
     <Reference Include="Colorful.Console, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Colorful.Console.1.2.6\lib\net461\Colorful.Console.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleColorLogger.cs" />
+    <Compile Include="Console\ConsoleColorLogger.cs" />
+    <Compile Include="Console\ConsoleTitleUpdater.cs" />
     <Compile Include="GcEventMonitor.cs" />
     <Compile Include="Some.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

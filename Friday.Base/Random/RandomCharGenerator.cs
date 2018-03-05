@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Enumerable = Friday.Base.Extensions.Enumerable.Enumerable;
+using Friday.Base.Extensions.Enumerable;
 
 
 namespace Friday.Base.Random
@@ -9,9 +9,9 @@ namespace Friday.Base.Random
 	public class RandomCharGenerator : IRandomCharGenerator
 	{
 		private readonly RandomCharGeneratorConfiguration cfg;
-		private readonly IEnumerable<char> alphaRange = Enumerable.Range('a', 'z');
-		private readonly IEnumerable<char> capitalAlphaRange = Enumerable.Range('A', 'Z');
-		private readonly IEnumerable<char> numericRange = Enumerable.Range('0', '9');
+		private readonly IEnumerable<char> alphaRange = FridayEnumerable.Range('a', 'z');
+		private readonly IEnumerable<char> capitalAlphaRange = FridayEnumerable.Range('A', 'Z');
+		private readonly IEnumerable<char> numericRange = FridayEnumerable.Range('0', '9');
 		private IEnumerable<char> workingRange = new char[0];
 		private readonly System.Random rng = new System.Random();
 		public RandomCharGenerator(RandomCharGeneratorConfiguration cfg)

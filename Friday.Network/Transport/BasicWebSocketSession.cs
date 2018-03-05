@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.WebSockets;
+using System.Runtime.Remoting.Contexts;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 
@@ -7,16 +9,16 @@ namespace Friday.Network.Transport
 {
 	public abstract class BasicWebSocketSession : WebSocketBehavior
 	{
-		public bool IsAlive => State == WebSocketState.Open;
+		public bool IsAlive => State == WebSocketSharp.WebSocketState.Open;
 
 		protected sealed override void OnMessage(MessageEventArgs e)
 		{
 			try
 			{
-				if (e.Type==Opcode.Text)
+				if (e.IsText)
 					ProcessTextMessage(e.Data);
 
-				if (e.Type==Opcode.Binary)
+				if (e.IsBinary)
 					ProcessBinaryMessage(e.RawData);
 			}
 

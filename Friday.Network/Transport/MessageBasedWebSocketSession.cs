@@ -1,5 +1,6 @@
 ﻿using Friday.Base.Exceptions;
 using Friday.Base.Network;
+using Friday.Base.Reflection;
 using Friday.Base.Serialization.Readable;
 
 namespace Friday.Network.Transport
