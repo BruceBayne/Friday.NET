@@ -8,6 +8,19 @@ namespace Friday.ValueTypes.Tests.Math
 	[TestCategory("Percent")]
 	public class PercentValueTypeTests
 	{
+
+
+
+		[TestMethod]
+		public void Foo()
+		{
+
+
+
+		}
+
+
+
 		[TestMethod]
 		public void BasicComparisonOperatorsOverrideShouldWork()
 		{

@@ -9,25 +9,24 @@ namespace Friday.Service.Basics.Console
 {
 	public class ConsoleColorLogger : BaseLogger
 	{
-		private readonly StyleSheet styleSheet;
-		public const string HttpFtpUrlPattern = "(?:(?:(?:ftp)|(?:https?)):\\/\\/[\\w.\\-/]+)|(?:[\\w.-]+?.\\/[\\w.\\-%?]*)";
+		protected readonly StyleSheet StyleSheet;
 
 
 		public void ClearStyles()
 		{
-			styleSheet.Styles.Clear();
+			StyleSheet.Styles.Clear();
 		}
 
 		public void AddStyle(string regexp, Color color)
 		{
-			styleSheet.AddStyle(regexp, color);
+			StyleSheet.AddStyle(regexp, color);
 		}
 
 
 		public ConsoleColorLogger()
 		{
 
-			styleSheet = new StyleSheet(Color.BurlyWood);
+			StyleSheet = new StyleSheet(Color.BurlyWood);
 
 			FillupNumbers();
 			FillupSuccess();
@@ -35,85 +34,80 @@ namespace Friday.Service.Basics.Console
 			FillupDateTime();
 
 
-			styleSheet.AddStyle("\\$", Color.LawnGreen);
+			StyleSheet.AddStyle("\\$", Color.LawnGreen);
 
-			styleSheet.AddStyle("(?i)\\w*\\.*\\w*service*", Color.LawnGreen);
-			styleSheet.AddStyle("(?i)\\w*uptime*", Color.CornflowerBlue);
-			styleSheet.AddStyle("(?i)\\w*version*", Color.CornflowerBlue);
+			StyleSheet.AddStyle("(?i)\\w*\\.*\\w*service*", Color.LawnGreen);
+			StyleSheet.AddStyle("(?i)\\w*uptime*", Color.CornflowerBlue);
+			StyleSheet.AddStyle("(?i)\\w*version*", Color.CornflowerBlue);
 
 
-			styleSheet.AddStyle(HttpFtpUrlPattern, Color.SkyBlue);
-			styleSheet.AddStyle("(?i)warn[ing]*", Color.Yellow);
+
+			StyleSheet.AddStyle("(?i)warn[ing]*", Color.Yellow);
 
 			FillupCryptoPairs();
 
 
 
 
-			styleSheet.AddStyle(RegularExpressions.IpV4AddressPattern, Color.AntiqueWhite);
+			//styleSheet.AddStyle(RegularExpressions.IpV4AddressPattern, Color.AntiqueWhite);
 		}
 
 		private void FillupDateTime()
 		{
 			var timeRegex = "\\d\\d:\\d\\d:\\d\\d\\.*\\d*";
 			var dateRegexp = "(\\d+)[-.\\/](\\d+)[-.\\/](\\d+)";
-			styleSheet.AddStyle(timeRegex, Color.Pink);
-			styleSheet.AddStyle(dateRegexp, Color.DarkTurquoise);
+			StyleSheet.AddStyle(timeRegex, Color.Pink);
+			StyleSheet.AddStyle(dateRegexp, Color.DarkTurquoise);
 		}
 
 		private void FillupCryptoPairs()
 		{
-			var slashSeparated = "\\w{1,3}?\\w?\\w\\w\\w\\/\\w?\\w?\\w\\w\\w";
-			styleSheet.AddStyle(slashSeparated, Color.HotPink);
+			var slashSeparated = "\\w?\\w?\\w\\w\\w\\/\\w?\\w?\\w\\w\\w";
+			StyleSheet.AddStyle(slashSeparated, Color.HotPink);
 		}
 
 		private void FillupErrors()
 		{
-			styleSheet.AddStyle("(?i)offline", Color.Red);
-			styleSheet.AddStyle("(?i)exception", Color.Red);
+			StyleSheet.AddStyle("(?i)offline", Color.Red);
+			StyleSheet.AddStyle("(?i)exception", Color.Red);
 		}
 
 		private void FillupNumbers()
 		{
 			var integerNumberPattern = "\\s+[-]*\\(*\\d+\\)*[,:]*(\\s+|$)";
-			styleSheet.AddStyle(integerNumberPattern, Color.Yellow);
+			StyleSheet.AddStyle(integerNumberPattern, Color.Yellow);
 
 
 			var floatNumberPattern = "\\s+[-]*\\(*\\d+[,\\.]\\d+\\)*[,:]*(\\s+|$)";
-			styleSheet.AddStyle(floatNumberPattern, Color.Yellow);
+			StyleSheet.AddStyle(floatNumberPattern, Color.Yellow);
 		}
 
 		private void FillupSuccess()
 		{
-			styleSheet.AddStyle("(?i)ready", Color.LightGreen);
-			styleSheet.AddStyle("(?i)online", Color.LightGreen);
-			styleSheet.AddStyle("(?i)connect[ed]*", Color.LightGreen);
-			styleSheet.AddStyle("(?i)success[full]*", Color.LimeGreen);
-		}
-
-		public static string FormatLogLine2(string line)
-		{
-			var dtTime = DateTime.Now.ToString("hh:mm:ss.fff");
-			return $"{dtTime} {line}";
+			StyleSheet.AddStyle("(?i)ready", Color.LightGreen);
+			StyleSheet.AddStyle("(?i)online", Color.LightGreen);
+			StyleSheet.AddStyle("(?i)connect[ed]*", Color.LightGreen);
+			StyleSheet.AddStyle("(?i)disconnect[ed]*", Color.Gold);
+			StyleSheet.AddStyle("(?i)success[full]*", Color.LimeGreen);
 		}
 
 		public override void Log(LogLevel level, string message)
 		{
 			if (level == LogLevel.Error || level == LogLevel.Critical)
 			{
-				Colorful.Console.WriteLine(FormatLogLine2(message), Color.Red);
+				Colorful.Console.WriteLine(FormatLogLine(message), Color.Red);
 				return;
 			}
 
 			if (level == LogLevel.Warning)
 			{
-				Colorful.Console.WriteLine(FormatLogLine2(message), Color.Gold);
+				Colorful.Console.WriteLine(FormatLogLine(message), Color.Gold);
 				return;
 			}
 
 
-			var formatMsg = FormatLogLine2($"{level} / {message}");
-			Colorful.Console.WriteLineStyled(styleSheet, "{0}", formatMsg);
+			var formatMsg = FormatLogLine($"{level} / {message}");
+			Colorful.Console.WriteLineStyled(formatMsg, StyleSheet);
 		}
 	}
 }

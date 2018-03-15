@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Friday.Base.Storage;
 using Newtonsoft.Json;
 
 namespace Friday.Json.Basics
@@ -7,7 +8,7 @@ namespace Friday.Json.Basics
 	public abstract class NewtonsoftJsonRepository : IEntityRepository
 	{
 		private const string FileExtension = ".json";
-		protected JsonSerializerSettings JsonSettings;
+		protected readonly JsonSerializerSettings JsonSettings;
 
 		protected abstract string GetHomePath();
 
@@ -30,39 +31,39 @@ namespace Friday.Json.Basics
 		}
 
 
-		public void SaveEntity<T>(T entity)
+		public void RemoveEntity(string entityName)
 		{
-			SaveEntity(entity, GetFileNameForEntity(entity));
+			var fileToRemove = GetFullPath(entityName);
+			if (File.Exists(fileToRemove))
+				File.Delete(fileToRemove);
 		}
 
-		protected virtual string GetFileNameForEntity<T>(T entity)
-		{
-			return entity.GetType().Name;
-		}
 
-		private void SaveEntity(object entity, string fileName)
+
+		public void SaveEntity<T>(string entityName, T entity) where T : new()
 		{
 			var serialized = JsonConvert.SerializeObject(entity, JsonSettings);
-			var filePath = GetFullPath(fileName);
+			var filePath = GetFullPath(entityName);
 			File.WriteAllText(filePath, serialized);
+
 		}
+
+
 
 		private string GetFullPath(string fileName)
 		{
 			return Path.Combine(HomeDirectory, fileName + FileExtension);
 		}
 
-
-
-		public object LoadEntity(Type e)
+		public object LoadEntity(string entityName, Type e)
 		{
 
-			var filePath = GetFullPath(GetFileNameForEntity(e));
+			var filePath = GetFullPath(entityName);
 
 			if (!File.Exists(filePath))
 			{
 				var defaultNewEntity = Activator.CreateInstance(e);
-				SaveEntity(defaultNewEntity);
+				SaveEntity(entityName, defaultNewEntity);
 				return defaultNewEntity;
 			}
 			return JsonConvert.DeserializeObject(File.ReadAllText(filePath), e, JsonSettings);
@@ -70,9 +71,9 @@ namespace Friday.Json.Basics
 
 		}
 
-		public T LoadEntity<T>() where T : new()
+		public T LoadEntity<T>(string entityName) where T : new()
 		{
-			return (T)LoadEntity(typeof(T));
+			return (T)LoadEntity(entityName, typeof(T));
 		}
 	}
 }
