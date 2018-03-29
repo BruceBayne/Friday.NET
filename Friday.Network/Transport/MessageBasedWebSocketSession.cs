@@ -1,4 +1,5 @@
-﻿using Friday.Base.Exceptions;
+﻿using System.Threading.Tasks;
+using Friday.Base.Exceptions;
 using Friday.Base.Network;
 using Friday.Base.Reflection;
 using Friday.Base.Serialization.Readable;
@@ -29,12 +30,12 @@ namespace Friday.Network.Transport
 		}
 
 
-		protected abstract void ProcessMessage(TClientMessage message);
+		protected abstract Task ProcessMessage(TClientMessage message);
 
-		protected override void ProcessTextMessage(string message)
+		protected override async Task ProcessTextMessage(string message)
 		{
 			var objectFromPacket = GetObjectFromMessage(message);
-			ProcessMessage(objectFromPacket);
+			await ProcessMessage(objectFromPacket);
 		}
 
 		protected TClientMessage GetObjectFromMessage(string textMessage)

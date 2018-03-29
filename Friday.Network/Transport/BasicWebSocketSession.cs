@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.WebSockets;
 using System.Runtime.Remoting.Contexts;
+using System.Threading.Tasks;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 
@@ -11,20 +12,20 @@ namespace Friday.Network.Transport
 	{
 		public bool IsAlive => State == WebSocketSharp.WebSocketState.Open;
 
-		protected sealed override void OnMessage(MessageEventArgs e)
+		protected sealed override async void OnMessage(MessageEventArgs e)
 		{
 			try
 			{
 				if (e.IsText)
-					ProcessTextMessage(e.Data);
+					await ProcessTextMessage(e.Data);
 
 				if (e.IsBinary)
-					ProcessBinaryMessage(e.RawData);
+					await ProcessBinaryMessage(e.RawData);
 			}
 
 			catch (Exception ex)
 			{
-				ProcessException(ex);
+				await ProcessExceptionNvi(ex);
 			}
 		}
 
@@ -34,14 +35,28 @@ namespace Friday.Network.Transport
 				Context.WebSocket.Close(CloseStatusCode.Normal);
 		}
 
-		protected virtual void ProcessBinaryMessage(byte[] eRawData)
+		protected virtual Task ProcessBinaryMessage(byte[] eRawData)
 		{
+			return Task.CompletedTask;
 		}
 
 
-		protected abstract void ProcessException(Exception e);
+		private async Task ProcessExceptionNvi(Exception e)
+		{
+			try
+			{
+				await ProcessException(e);
+			}
+			catch (Exception)
+			{
+				CloseSession();
+			}
+		}
 
 
-		protected abstract void ProcessTextMessage(string eData);
+		protected abstract Task ProcessException(Exception e);
+
+
+		protected abstract Task ProcessTextMessage(string eData);
 	}
 }

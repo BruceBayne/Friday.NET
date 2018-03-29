@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using Friday.Base.Network;
 using Friday.Base.Serialization.Readable;
 using WebSocketSharp;
@@ -14,7 +15,7 @@ namespace Friday.Network.Transport
 
 	{
 		private readonly IAuthService<TSignInMessage, TServerMessage> authService;
-		
+
 
 		protected IRoutingContext<TServerMessage> RoutingContext { get; private set; }
 		protected bool IsAuthenticated => RoutingContext != null;
@@ -47,14 +48,14 @@ namespace Friday.Network.Transport
 				RoutingContext.OnMessageAvailable -= RouterOnMessageAvailable;
 				RoutingContext.Dispose();
 			}
-            RoutingContext = null;
+			RoutingContext = null;
 		}
 
-		protected sealed override void ProcessMessage(TClientMessage message)
+		protected sealed override async Task ProcessMessage(TClientMessage message)
 		{
 			if (IsAuthenticated)
 			{
-				ProcessAuthorizedMessage(message);
+				await ProcessAuthorizedMessage(message);
 				return;
 			}
 
@@ -65,13 +66,13 @@ namespace Friday.Network.Transport
 			}
 		}
 
-		private void ProcessSignIn(TSignInMessage signInMessage)
+		private async void ProcessSignIn(TSignInMessage signInMessage)
 		{
-			RoutingContext = authService.LoadContext(signInMessage);
+			RoutingContext = await authService.LoadContext(signInMessage);
 			Send(GetAuthSuccessMessage(signInMessage));
 			RoutingContext.OnMessageAvailable += RouterOnMessageAvailable;
 
-		    RoutingContext.Start();
+			RoutingContext.Start();
 		}
 
 		protected virtual void RouterOnMessageAvailable(object sender, TServerMessage message)
@@ -79,7 +80,7 @@ namespace Friday.Network.Transport
 			Send(message);
 		}
 
-		private void ProcessAuthorizedMessage(TClientMessage message)
+		private async Task ProcessAuthorizedMessage(TClientMessage message)
 		{
 			if (message.GetType() == GetSignOutMessageType())
 			{
@@ -87,23 +88,25 @@ namespace Friday.Network.Transport
 				return;
 			}
 
-		    MessageReadyToBeRouted(message);
-			RoutingContext?.RouteObject(this, message);
-		    MessageRoutedSuccessfully(message);
+
+			MessageReadyToBeRouted(message);
+			if (RoutingContext != null)
+				await RoutingContext.RouteObjectAsync(this, message);
+			MessageRoutedSuccessfully(message);
 		}
 
-	    protected virtual void MessageReadyToBeRouted(TClientMessage message)
-	    {
+		protected virtual void MessageReadyToBeRouted(TClientMessage message)
+		{
 
-	    }
+		}
 
-        protected virtual void MessageRoutedSuccessfully(TClientMessage message)
-	    {
-	        
-	    }
+		protected virtual void MessageRoutedSuccessfully(TClientMessage message)
+		{
+
+		}
 
 
-	    public void Dispose()
+		public void Dispose()
 		{
 			Cleanup();
 		}

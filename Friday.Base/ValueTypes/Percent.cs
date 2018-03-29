@@ -4,6 +4,7 @@ namespace Friday.Base.ValueTypes
 {
 	public struct Percent : IComparable<Percent>
 	{
+		private const int MHundred = 100;
 		public readonly decimal Value;
 
 
@@ -43,14 +44,13 @@ namespace Friday.Base.ValueTypes
 		/// <summary>
 		/// 100% Percents
 		/// </summary>
-		public static Percent Hundred => From(100);
+		public static Percent Hundred => From(MHundred);
 
 
 		public static Percent From(byte value)
 		{
 			return new Percent(value);
 		}
-
 
 		public static Percent From(decimal value)
 		{
@@ -59,27 +59,27 @@ namespace Friday.Base.ValueTypes
 
 		public static decimal CalculatePercentAmountFromValue(decimal value, Percent percent)
 		{
-			return value * percent.Value / 100;
+			return value * percent.Value / MHundred;
 		}
 
 		public static int CalculatePercentAmountFromValue(int value, Percent percent)
 		{
-			return (int)Math.Round(value * percent.Value / 100);
+			return (int)Math.Round(value * percent.Value / MHundred);
 		}
 
 		public static long CalculatePercentAmountFromValue(long value, Percent percent)
 		{
-			return (long)Math.Round(value * percent.Value / 100);
+			return (long)Math.Round(value * percent.Value / MHundred);
 		}
 
 		public static uint CalculatePercentAmountFromValue(uint value, Percent percent)
 		{
-			return (uint)Math.Round(value * percent.Value / 100);
+			return (uint)Math.Round(value * percent.Value / MHundred);
 		}
 
 		public static ulong CalculatePercentAmountFromValue(ulong value, Percent percent)
 		{
-			return (ulong)Math.Round(value * percent.Value / 100);
+			return (ulong)Math.Round(value * percent.Value / MHundred);
 		}
 
 		public static int operator +(int m1, Percent m2)

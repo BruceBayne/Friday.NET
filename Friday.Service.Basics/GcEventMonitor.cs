@@ -11,7 +11,7 @@ namespace Friday.Service.Basics
 	{
 		public static bool IsServerGc => GCSettings.IsServerGC;
 
-		private CancellationTokenSource cancellationToken;
+		private readonly CancellationTokenSource cancellationToken = new CancellationTokenSource();
 
 		public event EventHandler<Stopwatch> OnGarbageCollectionFinished;
 
