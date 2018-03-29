@@ -1,4 +1,6 @@
-﻿using Friday.Base.Routing;
+﻿using System;
+using System.Threading.Tasks;
+using Friday.Base.Routing;
 using Friday.Base.Routing.Interfaces;
 using Friday.Base.Tests.Routing.Environment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -47,6 +49,12 @@ namespace Friday.Base.Tests.Routing
 
 			}
 		}
+
+
+
+
+
+
 
 
 		[TestMethod]
