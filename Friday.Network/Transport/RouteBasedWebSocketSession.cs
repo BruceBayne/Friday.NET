@@ -68,16 +68,15 @@ namespace Friday.Network.Transport
 
 		private async Task ProcessSignIn(TSignInMessage signInMessage)
 		{
-			RoutingContext = await authService.LoadContext(signInMessage);
-			Send(GetAuthSuccessMessage(signInMessage));
+			RoutingContext = await authService.LoadContext(signInMessage, out var responseMessage);
+			SendMessage(responseMessage);
 			RoutingContext.OnMessageAvailable += RouterOnMessageAvailable;
-
 			RoutingContext.Start();
 		}
 
 		protected virtual void RouterOnMessageAvailable(object sender, TServerMessage message)
 		{
-			Send(message);
+			SendMessage(message);
 		}
 
 		private async Task ProcessAuthorizedMessage(TClientMessage message)

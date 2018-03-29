@@ -23,8 +23,11 @@ namespace Friday.Network.Transport
 		}
 
 
-		public void Send(TServerMessage message)
+		public virtual void SendMessage(TServerMessage message)
 		{
+			if (message == null)
+				return;
+
 			var serialized = Serializer.Serialize(message);
 			Send(serialized);
 		}

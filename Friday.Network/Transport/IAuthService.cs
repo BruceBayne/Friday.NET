@@ -4,6 +4,6 @@ namespace Friday.Network.Transport
 {
 	public interface IAuthService<in TSignInMessage, TBasicMessage>
 	{
-		Task<IRoutingContext<TBasicMessage>> LoadContext(TSignInMessage signInMessage);
+		Task<IRoutingContext<TBasicMessage>> LoadContext(TSignInMessage signInMessage, out TBasicMessage serverMessage);
 	}
 }

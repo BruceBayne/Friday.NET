@@ -48,6 +48,7 @@
     <Compile Include="StreamExtenstions.cs" />
     <Compile Include="Transport\AbstractRoutingProvider.cs" />
     <Compile Include="Transport\BasicWebSocketSession.cs" />
+    <Compile Include="Transport\AuthToken.cs" />
     <Compile Include="Transport\IAuthService.cs" />
     <Compile Include="Transport\IBasicPresenter.cs" />
     <Compile Include="Transport\IRoutingContext.cs" />
