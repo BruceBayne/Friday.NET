@@ -8,9 +8,25 @@ namespace Friday.Json.Basics
 {
 	public sealed class NewtonsoftJsonSerializer : ICompleteSerializer, ICompleteReadableSerializer
 	{
-		private static string SerializeToText(object packet)
+		private JsonSerializerSettings settings;
+
+		public NewtonsoftJsonSerializer()
 		{
-			return JsonConvert.SerializeObject(packet);
+			settings = new JsonSerializerSettings()
+			{
+				MissingMemberHandling = MissingMemberHandling.Ignore,
+			};
+		}
+
+		public void SetupSerializerSettings(JsonSerializerSettings newSettings)
+		{
+			settings = newSettings;
+		}
+
+
+		private string SerializeToText(object packet)
+		{
+			return JsonConvert.SerializeObject(packet, Formatting.None, settings);
 		}
 
 		public byte[] Serialize(object packet)
@@ -40,12 +56,12 @@ namespace Friday.Json.Basics
 
 		public object Deserialize(string text, Type type)
 		{
-			return JsonConvert.DeserializeObject(text, type);
+			return JsonConvert.DeserializeObject(text, type, settings);
 		}
 
 		public T Deserialize<T>(string text)
 		{
-			return JsonConvert.DeserializeObject<T>(text);
+			return JsonConvert.DeserializeObject<T>(text, settings);
 		}
 	}
 }

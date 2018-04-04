@@ -30,7 +30,6 @@ namespace Friday.Network.Transport
 
 		protected abstract Type GetSignOutMessageType();
 
-		protected abstract TServerMessage GetAuthSuccessMessage(TSignInMessage signInMessage);
 
 
 		protected override void OnClose(CloseEventArgs e)

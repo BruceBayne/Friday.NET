@@ -25,7 +25,7 @@ namespace Friday.Network.Transport
 
 		public virtual void SendMessage(TServerMessage message)
 		{
-			if (message == null)
+			if (message == null || !IsAlive)
 				return;
 
 			var serialized = Serializer.Serialize(message);
