@@ -7,4 +7,14 @@
 		public bool NotExistInDto = true;
 		public float f = 1.33f;
 	}
+
+
+	public struct TestStructEntity
+	{
+		public int Id;
+		public string Name { get; set; }
+		public bool NotExistInDto;
+		public float f;
+	}
+
 }
