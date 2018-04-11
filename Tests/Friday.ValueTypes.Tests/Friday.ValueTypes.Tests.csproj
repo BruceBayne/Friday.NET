@@ -60,6 +60,7 @@
     <Compile Include="Currencies\BitcoinPercentageTests.cs" />
     <Compile Include="Math\PercentValueTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\SerializationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Friday.Base\Friday.Base.csproj">

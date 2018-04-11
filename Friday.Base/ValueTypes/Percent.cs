@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
+using System.Runtime.Serialization;
 
 namespace Friday.Base.ValueTypes
 {
-	public struct Percent : IComparable<Percent>
+	[Serializable]
+	public struct Percent : IComparable<Percent>, ISerializable
 	{
-		private const int MHundred = 100;
 		public readonly decimal Value;
-
 
 		private Percent(decimal percent)
 		{
@@ -41,16 +42,32 @@ namespace Friday.Base.ValueTypes
 			return $"{nameof(Value)}: {Value}";
 		}
 
+		private Percent(SerializationInfo info, StreamingContext para)
+		{
+			Value = info.GetDecimal(nameof(Value));
+		}
+
+		public void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			if (info == null)
+			{
+				throw new ArgumentNullException(nameof(info));
+			}
+
+			info.AddValue(nameof(Value), Value);
+		}
+
 		/// <summary>
 		/// 100% Percents
 		/// </summary>
-		public static Percent Hundred => From(MHundred);
+		public static Percent Hundred => From(100);
 
 
 		public static Percent From(byte value)
 		{
 			return new Percent(value);
 		}
+
 
 		public static Percent From(decimal value)
 		{
@@ -59,27 +76,27 @@ namespace Friday.Base.ValueTypes
 
 		public static decimal CalculatePercentAmountFromValue(decimal value, Percent percent)
 		{
-			return value * percent.Value / MHundred;
+			return value * percent.Value / 100;
 		}
 
 		public static int CalculatePercentAmountFromValue(int value, Percent percent)
 		{
-			return (int)Math.Round(value * percent.Value / MHundred);
+			return (int)Math.Round(value * percent.Value / 100);
 		}
 
 		public static long CalculatePercentAmountFromValue(long value, Percent percent)
 		{
-			return (long)Math.Round(value * percent.Value / MHundred);
+			return (long)Math.Round(value * percent.Value / 100);
 		}
 
 		public static uint CalculatePercentAmountFromValue(uint value, Percent percent)
 		{
-			return (uint)Math.Round(value * percent.Value / MHundred);
+			return (uint)Math.Round(value * percent.Value / 100);
 		}
 
 		public static ulong CalculatePercentAmountFromValue(ulong value, Percent percent)
 		{
-			return (ulong)Math.Round(value * percent.Value / MHundred);
+			return (ulong)Math.Round(value * percent.Value / 100);
 		}
 
 		public static int operator +(int m1, Percent m2)
@@ -134,12 +151,12 @@ namespace Friday.Base.ValueTypes
 
 		public static Percent operator +(Percent m1, Percent m2)
 		{
-			return Percent.From(m1.Value + m2.Value);
+			return From(m1.Value + m2.Value);
 		}
 
 		public static Percent operator -(Percent m1, Percent m2)
 		{
-			return Percent.From(m1.Value - m2.Value);
+			return From(m1.Value - m2.Value);
 		}
 
 		public static bool operator >(Percent m1, Percent m2)
@@ -172,9 +189,28 @@ namespace Friday.Base.ValueTypes
 			return m1.Value != m2.Value;
 		}
 
+		[Pure]
 		public int CompareTo(Percent other)
 		{
 			return Value.CompareTo(other.Value);
+		}
+
+		[Pure]
+		public bool Equals(Percent other)
+		{
+			return Value == other.Value;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			return obj is Percent percent && Equals(percent);
+		}
+
+		[Pure]
+		public override int GetHashCode()
+		{
+			return Value.GetHashCode();
 		}
 	}
 }
