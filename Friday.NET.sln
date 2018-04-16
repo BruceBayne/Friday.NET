@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Friday.Json.Basics", "Frida
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Service.Basics", "Friday.Service.Basics\Friday.Service.Basics.csproj", "{0F3E7411-719B-4D29-ABBB-D5DDB798247A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Telemetry.Measure", "Friday.Telemetry.Measure\Friday.Telemetry.Measure\Friday.Telemetry.Measure.csproj", "{3B977D14-E190-4C20-B821-80AABEE86A18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Friday.Telemetry.Measure", "Friday.Telemetry.Measure\Friday.Telemetry.Measure.csproj", "{4DACB9F4-2D82-4F98-9323-2A643A01A463}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,10 +73,10 @@ Global
 		{0F3E7411-719B-4D29-ABBB-D5DDB798247A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F3E7411-719B-4D29-ABBB-D5DDB798247A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F3E7411-719B-4D29-ABBB-D5DDB798247A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B977D14-E190-4C20-B821-80AABEE86A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B977D14-E190-4C20-B821-80AABEE86A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B977D14-E190-4C20-B821-80AABEE86A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B977D14-E190-4C20-B821-80AABEE86A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DACB9F4-2D82-4F98-9323-2A643A01A463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DACB9F4-2D82-4F98-9323-2A643A01A463}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DACB9F4-2D82-4F98-9323-2A643A01A463}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DACB9F4-2D82-4F98-9323-2A643A01A463}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
