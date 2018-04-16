@@ -32,18 +32,7 @@ namespace Friday.Base.Tests.Reflection
 		}
 
 
-		[TestMethod]
-		public void Zzz()
-		{
-			var entity = GetTestEntity();
-
-			var duplicate = entity.MapPropertiesWithFieldsTo<TestStructEntity>();
-
-			duplicate.Name.Should().Be("EntityName");
-
-			entity.ShouldBeEquivalentTo(duplicate);
-
-		}
+		
 
 
 

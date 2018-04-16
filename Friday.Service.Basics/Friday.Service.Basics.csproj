@@ -43,6 +43,8 @@
     <Compile Include="Console\ConsoleColorLogger.cs" />
     <Compile Include="Console\ConsoleTitleUpdater.cs" />
     <Compile Include="GcEventMonitor.cs" />
+    <Compile Include="Statistics\CurrentProcess.cs" />
+    <Compile Include="Statistics\Processor.cs" />
     <Compile Include="Some.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

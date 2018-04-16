@@ -13,14 +13,15 @@ namespace Friday.Base.Extensions.Reflection
 		}
 
 
-		public static T MapPropertiesWithFieldsFrom<T>(this T source, object destination)
-		{
+		public static T MapPropertiesWithFieldsFrom<T>(this T source, object destination) where T : class
+
+        {
 			destination.CopyProperties(source);
 			destination.CopyFields(source);
 			return source;
 		}
 
-		public static T MapPropertiesWithFieldsTo<T>(this object source) where T : new()
+		public static T MapPropertiesWithFieldsTo<T>(this object source) where T : class, new()
 		{
 			var destination = new T();
 			source.CopyProperties(destination);

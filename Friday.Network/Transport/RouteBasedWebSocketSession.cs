@@ -60,12 +60,21 @@ namespace Friday.Network.Transport
 
 			if (!IsAuthenticated)
 			{
-				if (message is TSignInMessage signInMessage)
-					await ProcessSignIn(signInMessage);
-			}
+			    if (message is TSignInMessage signInMessage)
+			    {
+			        await ProcessSignIn(signInMessage);
+                    return;
+			    }
+			  await ProcessUnauthorizedMessage(message);
+            }
 		}
 
-		private async Task ProcessSignIn(TSignInMessage signInMessage)
+	    protected virtual Task ProcessUnauthorizedMessage(TClientMessage message)
+	    {
+	        return Task.CompletedTask;
+	    }
+
+	    private async Task ProcessSignIn(TSignInMessage signInMessage)
 		{
 			RoutingContext = await authService.LoadContext(signInMessage, out var responseMessage);
 			SendMessage(responseMessage);
