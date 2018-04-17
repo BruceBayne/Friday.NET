@@ -39,7 +39,7 @@ namespace Friday.Base.ValueTypes
 
 		public override string ToString()
 		{
-			return $"{nameof(Value)}: {Value}";
+			return $"{Value} %";
 		}
 
 		private Percent(SerializationInfo info, StreamingContext para)

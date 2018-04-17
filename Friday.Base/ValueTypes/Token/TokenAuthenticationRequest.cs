@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Friday.Network.Token
+namespace Friday.Base.ValueTypes.Token
 {
     [Serializable]
     public class TokenAuthenticationRequest : ITokenAuthenticationRequest

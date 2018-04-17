@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Friday.Network.Token
+namespace Friday.Base.ValueTypes.Token
 {
     [Serializable]
     public struct AuthToken
     {
         public readonly Guid Id;
         public readonly string UserAgent;
-        
+
         public override string ToString()
         {
             return $"{nameof(Id)}: {Id}, {nameof(UserAgent)}: {UserAgent}";
@@ -20,13 +20,13 @@ namespace Friday.Network.Token
         }
 
 
-        public AuthToken Create(string userAgent = "")
+        public static AuthToken Create(string userAgent = "")
         {
             return new AuthToken(Guid.NewGuid(), userAgent);
         }
 
 
-        public AuthToken Create(Guid id, string userAgent = "")
+        public static AuthToken Create(Guid id, string userAgent = "")
         {
             return new AuthToken(id, userAgent);
         }
