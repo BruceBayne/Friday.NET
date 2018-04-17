@@ -48,14 +48,16 @@
     <Compile Include="StreamExtenstions.cs" />
     <Compile Include="Transport\AbstractRoutingProvider.cs" />
     <Compile Include="Transport\BasicWebSocketSession.cs" />
-    <Compile Include="Transport\AuthToken.cs" />
+    <Compile Include="Token\AuthToken.cs" />
     <Compile Include="Transport\IAuthService.cs" />
     <Compile Include="Transport\IBasicPresenter.cs" />
     <Compile Include="Transport\IRoutingContext.cs" />
     <Compile Include="Transport\ISessionClosed.cs" />
+    <Compile Include="Token\ITokenAuthenticationRequest.cs" />
     <Compile Include="Transport\MessageBasedWebSocketSession.cs" />
     <Compile Include="Transport\PresenterBasedRoutingContext.cs" />
     <Compile Include="Transport\RouteBasedWebSocketSession.cs" />
+    <Compile Include="Token\TokenAuthenticationRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Friday.Base\Friday.Base.csproj">

@@ -8,7 +8,7 @@ namespace Friday.Network.Transport
 {
 	public abstract class BasicWebSocketSession : WebSocketBehavior
 	{
-		public bool IsAlive => State == WebSocketSharp.WebSocketState.Open;
+		public bool IsAlive => State == WebSocketState.Open;
 
 		protected sealed override async void OnMessage(MessageEventArgs e)
 		{
@@ -31,6 +31,7 @@ namespace Friday.Network.Transport
 		{
 			if (IsAlive)
 				Context.WebSocket.Close(CloseStatusCode.Normal);
+            
 		}
 
 		protected virtual Task ProcessBinaryMessage(byte[] eRawData)

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using Friday.Base.Exceptions;
 using Friday.Base.Network;
 using Friday.Base.Reflection;
