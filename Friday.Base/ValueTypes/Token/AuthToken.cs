@@ -19,6 +19,9 @@ namespace Friday.Base.ValueTypes.Token
         }
 
 
+        public static AuthToken Empty => new AuthToken(Guid.Empty);
+
+
         public static AuthToken Create()
         {
             return new AuthToken(Guid.NewGuid());
