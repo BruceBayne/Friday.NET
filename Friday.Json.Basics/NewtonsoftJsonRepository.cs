@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Friday.Json.Basics
 {
-	public abstract class NewtonsoftJsonRepository : IEntityRepository
+    public abstract class NewtonsoftJsonRepository : IEntityRepository
 	{
 		private const string FileExtension = ".json";
 		protected readonly JsonSerializerSettings JsonSettings;

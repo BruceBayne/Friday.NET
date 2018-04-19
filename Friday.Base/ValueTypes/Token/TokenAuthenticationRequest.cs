@@ -9,21 +9,23 @@ namespace Friday.Base.ValueTypes.Token
         public AuthToken Token { get; }
         public IPAddress IpAddress { get; }
 
-        public TokenAuthenticationRequest(AuthToken token, IPAddress ipAddress)
+        public string UserAgent { get; }
+
+        public TokenAuthenticationRequest(AuthToken token, IPAddress ipAddress, string userAgent)
         {
             Token = token;
             IpAddress = ipAddress;
+            UserAgent = userAgent;
         }
 
-
-        public static TokenAuthenticationRequest From(AuthToken token, IPAddress address)
+        public override string ToString()
         {
-            return new TokenAuthenticationRequest(token, address);
+            return $"{nameof(Token)}: {Token}, {nameof(IpAddress)}: {IpAddress}, {nameof(UserAgent)}: {UserAgent}";
         }
 
-        public static TokenAuthenticationRequest From(AuthToken token)
+        public static TokenAuthenticationRequest From(AuthToken token, IPAddress ipAddress, string userAgent)
         {
-            return new TokenAuthenticationRequest(token, IPAddress.Any);
+            return new TokenAuthenticationRequest(token, ipAddress, userAgent);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using Friday.Json.Basics.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -20,8 +21,9 @@ namespace Friday.Json.Basics
 					PreserveReferencesHandling = PreserveReferencesHandling.Objects,
 				};
 				jsonSettings.Converters.Add(new StringEnumConverter { });
-
-				return jsonSettings;
+			    jsonSettings.Converters.Add(new IpAddressConverter());
+			    jsonSettings.Converters.Add(new IpEndPointConverter());
+                return jsonSettings;
 			}
 		}
 	}

@@ -6,29 +6,28 @@ namespace Friday.Base.ValueTypes.Token
     public struct AuthToken
     {
         public readonly Guid Id;
-        public readonly string UserAgent;
+
 
         public override string ToString()
         {
-            return $"{nameof(Id)}: {Id}, {nameof(UserAgent)}: {UserAgent}";
+            return $"{nameof(Id)}: {Id}";
         }
 
-        public AuthToken(Guid id, string userAgent)
+        public AuthToken(Guid id)
         {
             Id = id;
-            UserAgent = userAgent;
         }
 
 
-        public static AuthToken Create(string userAgent = "")
+        public static AuthToken Create()
         {
-            return new AuthToken(Guid.NewGuid(), userAgent);
+            return new AuthToken(Guid.NewGuid());
         }
 
 
-        public static AuthToken Create(Guid id, string userAgent = "")
+        public static AuthToken Create(Guid id)
         {
-            return new AuthToken(id, userAgent);
+            return new AuthToken(id);
         }
     }
 }
