@@ -49,7 +49,7 @@ namespace Friday.Service.Basics.Console
 
 
 
-			//styleSheet.AddStyle(RegularExpressions.IpV4AddressPattern, Color.AntiqueWhite);
+			StyleSheet.AddStyle(RegularExpressions.IpV4AddressPattern, Color.AntiqueWhite);
 		}
 
 		private void FillupDateTime()

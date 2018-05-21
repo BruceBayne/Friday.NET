@@ -4,10 +4,14 @@ using Friday.Base.Regexp;
 
 namespace Friday.Base.Extensions.Strings
 {
+
 	public static class StringExtensions
 	{
 
-
+		public static bool EqualsNoCase(this string source, string value)
+		{
+			return string.Compare(source, value, StringComparison.OrdinalIgnoreCase) == 0;
+		}
 
 		public static string[] SplitCamelCase(this string source)
 		{
