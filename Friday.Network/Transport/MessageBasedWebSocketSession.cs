@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Friday.Base.Exceptions;
 using Friday.Base.Network;
@@ -7,7 +8,8 @@ using Friday.Base.Serialization.Readable;
 
 namespace Friday.Network.Transport
 {
-	public abstract class MessageBasedWebSocketSession<TServerMessage, TClientMessage, TClientMessageType> : BasicWebSocketSession
+	public abstract class
+		MessageBasedWebSocketSession<TServerMessage, TClientMessage, TClientMessageType> : BasicWebSocketSession
 		where TClientMessage : IMessageType<TClientMessageType>, new()
 		where TServerMessage : class
 
@@ -35,11 +37,20 @@ namespace Friday.Network.Transport
 
 
 		protected abstract Task ProcessMessage(TClientMessage message);
+		protected abstract void OnRequestFailed(TClientMessage request, Exception exception);
 
 		protected override async Task ProcessTextMessage(string message)
 		{
 			var objectFromPacket = GetObjectFromMessage(message);
-			await ProcessMessage(objectFromPacket);
+
+			try
+			{
+				await ProcessMessage(objectFromPacket);
+			}
+			catch (Exception e)
+			{
+				OnRequestFailed(objectFromPacket, e);
+			}
 		}
 
 		protected TClientMessage GetObjectFromMessage(string textMessage)

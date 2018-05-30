@@ -10,7 +10,7 @@ namespace Friday.Base.ValueTypes.Token
 
 		public override string ToString()
 		{
-			return $"{nameof(Id)}: {Id}";
+			return Id.ToString();
 		}
 
 		public AuthToken(Guid id)
@@ -25,6 +25,11 @@ namespace Friday.Base.ValueTypes.Token
 		public static AuthToken Create()
 		{
 			return new AuthToken(Guid.NewGuid());
+		}
+
+		public static AuthToken Create(string guid)
+		{
+			return new AuthToken(Guid.Parse(guid));
 		}
 
 
