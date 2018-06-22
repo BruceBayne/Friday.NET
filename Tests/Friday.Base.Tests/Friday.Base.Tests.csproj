@@ -174,7 +174,10 @@
     <Compile Include="Routing\Environment\ISomeSessionProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\Environment\SomeDto.cs" />
+    <Compile Include="Routing\Environment\SomeRoutingException.cs" />
     <Compile Include="Routing\RoutingBasicTests.cs" />
+    <Compile Include="Routing\RoutingContextTests.cs" />
+    <Compile Include="Routing\RoutingDoubleRouteTests.cs" />
     <Compile Include="Routing\RoutingInterfaceHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,20 @@ namespace Friday.Base.Extensions.Enumerable
 			return !source.Any();
 		}
 
-
+		/// <summary>
+		/// This approach has the risk of causing two passes over the data.
+		/// This isn't really a problem with most enumerables
+		/// In fact, optimizations exist already for Lists, Arrays, and even EF queries to evaluate the Count() operation in O(1) time.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="source"></param>
+		/// <param name="count"></param>
+		/// <returns></returns>
+		public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> source, int count)
+		{
+			// ReSharper disable once PossibleMultipleEnumeration
+			return source.Skip(Math.Max(0, source.Count() - count));
+		}
 
 		public static T TakeRandom<T>(this IEnumerable<T> source)
 		{

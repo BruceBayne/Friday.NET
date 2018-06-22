@@ -1,17 +1,18 @@
 using System;
+using Friday.Base.ValueTypes;
 
 namespace Friday.Base.Random
 {
 	public static class FridayRandom
 	{
 		private static System.Random rnd = new System.Random(Environment.TickCount);
-		public static bool IsRandomChanceOccured(int chanceInPercent)
+		public static bool IsRandomChanceOccured(Percent chance)
 		{
 
-			if (chanceInPercent == 0)
+			if (chance == Percent.Zero)
 				return false;
 			var randomValue = GetNextIncludingMax(1, 100);
-			return randomValue <= chanceInPercent;
+			return randomValue <= chance.Value;
 		}
 
 
@@ -22,7 +23,7 @@ namespace Friday.Base.Random
 
 
 
-		public static int GetNext() => GetNext(Int32.MinValue, int.MaxValue);
+		public static int GetNext() => GetNext(int.MinValue, int.MaxValue);
 
 		/// <summary>
 		/// This is own implementation  which include max in random range (e.g) min:1 max:5 can return 5

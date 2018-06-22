@@ -8,6 +8,14 @@ namespace Friday.Base.Routing
 		public string RouteTemplate { get; private set; }
 		public RouteCallType RouteCallType { get; private set; }
 
+		public const string DefaultRoutingStaticTemplate = "On{typeName}";
+
+
+		public static RouteOptions UseStaticDefaultTemplate()
+		{
+			return new RouteOptions(DefaultRoutingStaticTemplate);
+		}
+
 
 		public static RouteOptions UseStatic(string routeTemplate)
 		{
@@ -21,7 +29,7 @@ namespace Friday.Base.Routing
 			var ro = new RouteOptions()
 			{
 				RouteCallType = RouteCallType.RouteAsInterfaceMessageHandler,
-				RouteTemplate = string.Empty,
+				RouteTemplate = String.Empty,
 				ProcessingBehavior = behavior
 			};
 			return ro;

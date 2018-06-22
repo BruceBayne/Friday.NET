@@ -81,7 +81,7 @@ namespace Friday.Base.Routing
 		}
 
 
-		public  Task RouteObjectAsync(object routedObject)
+		public Task RouteObjectAsync(object routedObject)
 		{
 			return RouteObjectAsync(null, routedObject);
 		}
@@ -137,10 +137,18 @@ namespace Friday.Base.Routing
 			var routeRecord = objectToRoute.RouteRecord;
 			var methodArguments = ProvideMethodArguments(objectToRoute);
 
+			try
+			{
+				var result = routeRecord.SelectedMethod?.Invoke(routeRecord.Processor, methodArguments);
+				if (result is Task t)
+					await t;
+			}
+			catch (TargetInvocationException tie)
+			{
+				if (tie.InnerException != null)
+					throw tie.InnerException;
 
-			var result = routeRecord.SelectedMethod?.Invoke(routeRecord.Processor, methodArguments);
-			if (result is Task t)
-				await t;
+			}
 		}
 
 		private void ProcessAttributeHandlers(ObjectToRoute p)
@@ -217,7 +225,8 @@ namespace Friday.Base.Routing
 				   (
 					   x.GetGenericTypeDefinition() == typeof(IMessageHandler<>) ||
 					   x.GetGenericTypeDefinition() == typeof(IMessageHandler<,>) ||
-					   x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<>));
+					   x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<>) ||
+					   x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<,>));
 		}
 
 

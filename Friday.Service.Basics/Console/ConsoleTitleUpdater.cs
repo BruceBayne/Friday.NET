@@ -29,7 +29,7 @@ namespace Friday.Service.Basics.Console
 			while (!token.IsCancellationRequested)
 			{
 				Colorful.Console.Title =
-					$"Market.data.service: Uptime / {Uptime.FullUptime}";
+					$"{GetServiceName()}: Uptime / {Uptime.FullUptime}";
 				Thread.Sleep(TimeSpan.FromSeconds(1));
 			}
 		}

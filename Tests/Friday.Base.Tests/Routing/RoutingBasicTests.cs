@@ -58,7 +58,7 @@ namespace Friday.Base.Tests.Routing
 
 
 		[TestMethod]
-		public void Foo()
+		public void BasicValueTypesShouldBeRouted()
 		{
 			var m = new MessageDerived();
 

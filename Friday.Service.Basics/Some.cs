@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Friday.Service.Basics
 {
-    public class Some
+	internal class Some
 	{
 
 		public void Foo()

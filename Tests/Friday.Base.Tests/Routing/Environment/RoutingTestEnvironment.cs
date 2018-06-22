@@ -11,8 +11,18 @@ namespace Friday.Base.Tests.Routing.Environment
 		}
 
 
+		internal static RoutingProvider GetStaticRoutingWithInterfaceRoutingProvider(params object[] processors)
+		{
+			var router = new RoutingProvider();
+			foreach (var processor in processors)
+			{
+				router.RegisterRoute(new RouteRule(processor, RouteOptions.UseStaticDefaultTemplate()));
+				router.RegisterRoute(RouteRule.UseInterfaceMessageHandler(processor));
 
+			}
 
+			return router;
+		}
 
 
 
@@ -20,7 +30,7 @@ namespace Friday.Base.Tests.Routing.Environment
 		{
 			var router = new RoutingProvider();
 			foreach (var processor in processors)
-				router.RegisterRoute(new RouteRule(processor, RouteOptions.UseInterfaceMessageHandler()));
+				router.RegisterRoute(RouteRule.UseInterfaceMessageHandler(processor));
 			return router;
 		}
 
@@ -28,7 +38,7 @@ namespace Friday.Base.Tests.Routing.Environment
 		{
 			var provider = new RoutingProvider();
 			foreach (var processor in processors)
-				provider.RegisterRoute(new RouteRule(processor, RouteOptions.UseStatic("On{typeName}")));
+				provider.RegisterRoute(new RouteRule(processor, RouteOptions.UseStaticDefaultTemplate()));
 
 			return provider;
 		}
