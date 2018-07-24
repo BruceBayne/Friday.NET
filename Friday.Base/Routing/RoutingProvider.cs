@@ -162,7 +162,7 @@ namespace Friday.Base.Routing
 
 		private IEnumerable<StaticRoutingTableRecord> GetInterfaceRoutingRecords(object context, object routedObject)
 		{
-			var interfaceMethodName = nameof(IMessageHandler<object>.HandleMessage);
+			const string interfaceMethodName = nameof(IMessageHandler<object>.HandleMessage);
 			foreach (var apiRoute in routes.Where(t => t.Options.UseInterfaceMessageRouting))
 			{
 				var processorType = apiRoute.RouteProcessor.GetType();
@@ -171,8 +171,7 @@ namespace Friday.Base.Routing
 				var allMessageHandlerTypes = processorType
 					.GetInterfaces()
 					.Where(TypeIsMessageHandler)
-					.Where(x => TypeHandlerCompatibleTo(x, context, routedObject))
-					.ToList();
+					.Where(x => TypeHandlerCompatibleTo(x, context, routedObject));
 
 
 				foreach (var compatibleTypes in allMessageHandlerTypes)
@@ -221,12 +220,17 @@ namespace Friday.Base.Routing
 
 		private static bool TypeIsMessageHandler(Type x)
 		{
-			return x.IsGenericType &&
-				   (
-					   x.GetGenericTypeDefinition() == typeof(IMessageHandler<>) ||
-					   x.GetGenericTypeDefinition() == typeof(IMessageHandler<,>) ||
-					   x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<>) ||
-					   x.GetGenericTypeDefinition() == typeof(IMessageHandlerAsync<,>));
+			if (!x.IsGenericType) return false;
+
+
+			var genericTypeDefinition = x.GetGenericTypeDefinition();
+			return
+				genericTypeDefinition == typeof(IMessageHandler<>) ||
+				genericTypeDefinition == typeof(IMessageHandler<,>) ||
+				genericTypeDefinition == typeof(IMessageHandlerAsync<>) ||
+				genericTypeDefinition == typeof(IMessageHandlerAsync<,>);
+
+
 		}
 
 

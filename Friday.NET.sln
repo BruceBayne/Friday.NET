@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.ValueTypes.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Base.Tests", "Tests\Friday.Base.Tests\Friday.Base.Tests.csproj", "{4245B211-9CCB-4372-8ECB-29B847526A02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Network", "Friday.Network\Friday.Network.csproj", "{32516A4C-0DAE-462D-A27E-A32859224FF7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Bitcoin.Services", "Friday.Bitcoin.Services\Friday.Bitcoin.Services.csproj", "{E9565AC3-1015-4E8D-8779-EDA6352E8C51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Autofac.Composition.Tests", "Tests\Friday.Autofac.Composition.Tests\Friday.Autofac.Composition.Tests\Friday.Autofac.Composition.Tests.csproj", "{9E3E99FE-D601-4C63-9ECD-CCFD3F6CF791}"
@@ -26,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Service.Basics", "Friday.Service.Basics\Friday.Service.Basics.csproj", "{0F3E7411-719B-4D29-ABBB-D5DDB798247A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Friday.Telemetry.Measure", "Friday.Telemetry.Measure\Friday.Telemetry.Measure.csproj", "{4DACB9F4-2D82-4F98-9323-2A643A01A463}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friday.Network", "Friday.Network\Friday.Network.csproj", "{EACBD217-B825-4E86-8966-057AF857B4C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +45,6 @@ Global
 		{4245B211-9CCB-4372-8ECB-29B847526A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4245B211-9CCB-4372-8ECB-29B847526A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4245B211-9CCB-4372-8ECB-29B847526A02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32516A4C-0DAE-462D-A27E-A32859224FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32516A4C-0DAE-462D-A27E-A32859224FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32516A4C-0DAE-462D-A27E-A32859224FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32516A4C-0DAE-462D-A27E-A32859224FF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9565AC3-1015-4E8D-8779-EDA6352E8C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E9565AC3-1015-4E8D-8779-EDA6352E8C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9565AC3-1015-4E8D-8779-EDA6352E8C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,6 +73,10 @@ Global
 		{4DACB9F4-2D82-4F98-9323-2A643A01A463}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DACB9F4-2D82-4F98-9323-2A643A01A463}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DACB9F4-2D82-4F98-9323-2A643A01A463}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACBD217-B825-4E86-8966-057AF857B4C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EACBD217-B825-4E86-8966-057AF857B4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EACBD217-B825-4E86-8966-057AF857B4C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EACBD217-B825-4E86-8966-057AF857B4C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

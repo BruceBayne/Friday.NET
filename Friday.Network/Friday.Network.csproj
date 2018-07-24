@@ -1,69 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32516A4C-0DAE-462D-A27E-A32859224FF7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Friday.Network</RootNamespace>
-    <AssemblyName>Friday.Network</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Friday.Base" Version="1.0.39" />
+    <PackageReference Include="websocketsharp.core" Version="1.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Extensions\SocketExtensions.cs" />
-    <Compile Include="PacketMaintainers\IMessageTypeDeterminer.cs" />
-    <Compile Include="NetworkTypeLengthHeader.cs" />
-    <Compile Include="PacketMaintainers\INetworkPacketMaintainer.cs" />
-    <Compile Include="PacketMaintainers\NetworkPacketMaintainer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SocketSettings.cs" />
-    <Compile Include="StreamExtenstions.cs" />
-    <Compile Include="Transport\AbstractRoutingProvider.cs" />
-    <Compile Include="Transport\BasicWebSocketSession.cs" />
-    <Compile Include="Transport\IAuthService.cs" />
-    <Compile Include="Transport\IBasicPresenter.cs" />
-    <Compile Include="Transport\IRoutingContext.cs" />
-    <Compile Include="Transport\ISessionClosed.cs" />
-    <Compile Include="Transport\MessageBasedWebSocketSession.cs" />
-    <Compile Include="Transport\PresenterBasedRoutingContext.cs" />
-    <Compile Include="Transport\RouteBasedWebSocketSession.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Friday.Base\Friday.Base.csproj">
-      <Project>{7ee1e87c-92e8-441b-9b99-625815e48d76}</Project>
-      <Name>Friday.Base</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

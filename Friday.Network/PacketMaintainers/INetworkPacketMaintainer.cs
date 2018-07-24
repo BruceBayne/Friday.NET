@@ -2,9 +2,9 @@
 
 namespace Friday.Network.PacketMaintainers
 {
-    public interface INetworkPacketMaintainer : IMessageTypeDeterminer, ICompleteSerializer
-    {
-        
+	public interface INetworkPacketMaintainer : ITypeExtractor, ICompleteSerializer
+	{
 
-    }
+
+	}
 }
