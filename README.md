@@ -8,11 +8,26 @@ Contains the following assemblies
 #### Friday.Base
 Lots of extension methods, Routing, and  auxiliary classes useful almost in every project.
  
- + NET Core compatible
+ + NET Standart compatible
  + Xamarin compatible
  + Unity3d compatible
- + Third Party Reference free 
-  
+ + NO Third Party Reference free 
+
+# Task Extensions
+Allow you to replace default (ThreadPool) TaskScheduler with custom one, that give additional information , such as how many tasks in queue,
+which of them executing right now, e.t.c
+
+```c#
+
+FridayTask.SetupFridaySchedulerAsDefault(); //this will change TaskScheduler.Default
+
+//now you can use
+FridayTaskScheduler.EnqueuedTasks;  // how many tasks are in ThreadPool Queue
+FridayTaskScheduler.RunningTasks; // how many tasks are currently running 
+
+FridayTaskScheduler.BeforeTaskExecution; //allow you execute any action before ANY domain task execution
+FridayTaskScheduler.AfterTaskExecution; // same as above
+```
  
  
 # Routing
