@@ -5,8 +5,8 @@ namespace Friday.Base.Storage
 {
 	public interface IEntityLoader
 	{
-		object LoadEntity(string entityName, Type e);
-		T LoadEntity<T>(string entityName) where T : new();
+		object LoadOrDefaultEntity(string entityName, Type e);
+		T LoadOrDefaultEntity<T>(string entityName) where T : new();
 	}
 
 	public interface IEntityLoaderAsync

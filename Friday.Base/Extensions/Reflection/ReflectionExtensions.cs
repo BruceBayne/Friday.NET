@@ -5,6 +5,27 @@ namespace Friday.Base.Extensions.Reflection
 {
 	public static class ReflectionExtensions
 	{
+		public static bool TryReplaceBackingField<TType>(string backingFieldName, object newFieldValue)
+		{
+			const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.IgnoreCase | BindingFlags.Public |
+											  BindingFlags.Static;
+
+			var fieldInfo = typeof(TType).GetField(backingFieldName, bindingFlags);
+
+			if (fieldInfo == null)
+				return false;
+
+			try
+			{
+				fieldInfo.SetValue(null, newFieldValue);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 
 		public static void MapPropertiesWithFieldsTo(this object source, object destination)
 		{
@@ -15,7 +36,7 @@ namespace Friday.Base.Extensions.Reflection
 
 		public static T MapPropertiesWithFieldsFrom<T>(this T source, object destination) where T : class
 
-        {
+		{
 			destination.CopyProperties(source);
 			destination.CopyFields(source);
 			return source;
@@ -78,27 +99,33 @@ namespace Friday.Base.Extensions.Reflection
 				{
 					continue;
 				}
+
 				PropertyInfo targetProperty = typeDest.GetProperty(srcProp.Name);
 				if (targetProperty == null)
 				{
 					continue;
 				}
+
 				if (!targetProperty.CanWrite)
 				{
 					continue;
 				}
+
 				if (targetProperty.GetSetMethod(true) != null && targetProperty.GetSetMethod(true).IsPrivate)
 				{
 					continue;
 				}
+
 				if ((targetProperty.GetSetMethod().Attributes & MethodAttributes.Static) != 0)
 				{
 					continue;
 				}
+
 				if (!targetProperty.PropertyType.IsAssignableFrom(srcProp.PropertyType))
 				{
 					continue;
 				}
+
 				// Passed all tests, lets set the value
 				targetProperty.SetValue(destination, srcProp.GetValue(source, null), null);
 			}

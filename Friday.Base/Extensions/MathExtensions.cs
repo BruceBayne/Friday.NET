@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Friday.Base.Extensions.Strings
+namespace Friday.Base.Extensions
 {
 	public static class MathExtensions
 	{

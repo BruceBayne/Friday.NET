@@ -5,13 +5,13 @@ using System.Runtime.Serialization;
 namespace Friday.Base.ValueTypes
 {
 	[Serializable]
-	public struct Percent : IComparable<Percent>, ISerializable
+	public struct Percent : IComparable<Percent>, ISerializable, IEquatable<Percent>
 	{
 		public readonly decimal Value;
 
-		private Percent(decimal percent)
+		private Percent(decimal value)
 		{
-			Value = percent;
+			Value = value;
 		}
 
 

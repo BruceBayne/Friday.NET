@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Friday.ValueTypes.Currencies
 {
-	public struct BitCoin : IEqualityComparer<BitCoin>, IComparable<BitCoin>
+	public struct BitCoin : IEqualityComparer<BitCoin>, IComparable<BitCoin>, IEquatable<BitCoin>
 	{
 		public const uint BitsInOneBtc = 1_000_000;
 		public const uint SatoshiInOneBtc = 100_000_000;

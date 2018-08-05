@@ -179,6 +179,8 @@
     <Compile Include="Routing\RoutingContextTests.cs" />
     <Compile Include="Routing\RoutingDoubleRouteTests.cs" />
     <Compile Include="Routing\RoutingInterfaceHandlerTests.cs" />
+    <Compile Include="Tasks\CachedTaskTests.cs" />
+    <Compile Include="Tasks\CustomTaskSchedulerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

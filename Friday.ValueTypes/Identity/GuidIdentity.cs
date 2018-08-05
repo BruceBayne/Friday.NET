@@ -2,53 +2,53 @@
 
 namespace Friday.ValueTypes.Identity
 {
-    public abstract class GuidIdentity : IEquatable<GuidIdentity>
-    {
-        public Guid Id { get; set; }
+	public abstract class GuidIdentity : IEquatable<GuidIdentity>
+	{
+		public Guid Id { get; }
 
-        protected GuidIdentity()
-        {
-            Id = Guid.NewGuid();
-        }
+		protected GuidIdentity()
+		{
+			Id = Guid.NewGuid();
+		}
 
-        protected GuidIdentity(string id)
-        {
-            Id = Guid.Parse(id);
-        }
-
-
-        protected GuidIdentity(Guid id)
-        {
-            Id = id;
-        }
+		protected GuidIdentity(string id)
+		{
+			Id = Guid.Parse(id);
+		}
 
 
-        public static implicit operator Guid(GuidIdentity d)
-        {
-            return d.Id;
-        }
+		protected GuidIdentity(Guid id)
+		{
+			Id = id;
+		}
 
 
-        public bool Equals(GuidIdentity id)
-        {
-            if (ReferenceEquals(this, id)) return true;
-            if (ReferenceEquals(null, id)) return false;
-            return Id.Equals(id.Id);
-        }
+		public static implicit operator Guid(GuidIdentity d)
+		{
+			return d.Id;
+		}
 
-        public override bool Equals(object anotherObject)
-        {
-            return Equals(anotherObject as GuidIdentity);
-        }
 
-        public override int GetHashCode()
-        {
-            return (GetType().GetHashCode() * 907) + Id.GetHashCode();
-        }
+		public bool Equals(GuidIdentity id)
+		{
+			if (ReferenceEquals(this, id)) return true;
+			if (ReferenceEquals(null, id)) return false;
+			return Id.Equals(id.Id);
+		}
 
-        public override string ToString()
-        {
-            return GetType().Name + " [Id=" + Id + "]";
-        }
-    }
+		public override bool Equals(object anotherObject)
+		{
+			return Equals(anotherObject as GuidIdentity);
+		}
+
+		public override int GetHashCode()
+		{
+			return (GetType().GetHashCode() * 907) + Id.GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return GetType().Name + " [Id=" + Id + "]";
+		}
+	}
 }

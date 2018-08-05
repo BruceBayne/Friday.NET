@@ -3,7 +3,7 @@
 namespace Friday.Base.ValueTypes.Token
 {
 	[Serializable]
-	public struct AuthToken
+	public struct AuthToken : IEquatable<AuthToken>
 	{
 		public readonly Guid Id;
 
@@ -36,6 +36,22 @@ namespace Friday.Base.ValueTypes.Token
 		public static AuthToken Create(Guid id)
 		{
 			return new AuthToken(id);
+		}
+
+		public bool Equals(AuthToken other)
+		{
+			return Id.Equals(other.Id);
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			return obj is AuthToken token && Equals(token);
+		}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode();
 		}
 	}
 }

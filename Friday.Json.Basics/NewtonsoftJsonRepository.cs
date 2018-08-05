@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Friday.Json.Basics
 {
-    public abstract class NewtonsoftJsonRepository : IEntityRepository
+	public abstract class NewtonsoftJsonRepository : IEntityRepository
 	{
 		private const string FileExtension = ".json";
 		protected readonly JsonSerializerSettings JsonSettings;
@@ -55,7 +55,7 @@ namespace Friday.Json.Basics
 			return Path.Combine(HomeDirectory, fileName + FileExtension);
 		}
 
-		public object LoadEntity(string entityName, Type e)
+		public object LoadOrDefaultEntity(string entityName, Type e)
 		{
 
 			var filePath = GetFullPath(entityName);
@@ -71,9 +71,9 @@ namespace Friday.Json.Basics
 
 		}
 
-		public T LoadEntity<T>(string entityName) where T : new()
+		public T LoadOrDefaultEntity<T>(string entityName) where T : new()
 		{
-			return (T)LoadEntity(entityName, typeof(T));
+			return (T)LoadOrDefaultEntity(entityName, typeof(T));
 		}
 	}
 }
