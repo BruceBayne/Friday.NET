@@ -11,8 +11,7 @@ Lots of extension methods, Routing, and  auxiliary classes useful almost in ever
  + NET Standart compatible
  + Xamarin compatible
  + Unity3d compatible
- + NO Third Party Reference free 
-
+ + NO Third Party References
 
 
 # Task Extensions
@@ -32,7 +31,7 @@ FridayTaskScheduler.AfterTaskExecution; // same as above
 ```
  
  
-# Routing
+# Message Routing
  
 Useful in network applications with custom protocol messages, when they must be routed to specific processors
 
