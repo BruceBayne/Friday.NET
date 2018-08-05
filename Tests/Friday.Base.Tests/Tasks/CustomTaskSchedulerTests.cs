@@ -17,11 +17,6 @@ namespace Friday.Base.Tests.Tasks
 			Assert.IsTrue(FridayTask.SetupFridaySchedulerAsDefault());
 
 
-			FridayTaskScheduler.BeforeTaskExecution = task1 =>
-			{
-				//throw new ArgumentException("zz");
-			};
-
 			var task = Task.Run(async () =>
 			{
 				FridayTaskScheduler.EnqueuedTasks.Should().Be(1);

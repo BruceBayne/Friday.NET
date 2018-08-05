@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Friday.Base.Extensions.Assembly;
 using Friday.Base.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,6 +17,16 @@ namespace Friday.Base.Tests.Tasks
 	public class CachedTaskTests
 	{
 
+		[TestMethod]
+		public void CachingShouldBeSuccess2()
+		{
+
+			var dt = typeof(FridayTask).Assembly.GetLinkerDateTime();
+
+
+			Debug.WriteLine(dt);
+
+		}
 
 		[TestMethod]
 		public async Task CachingShouldBeSuccess()
