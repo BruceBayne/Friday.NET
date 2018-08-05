@@ -16,8 +16,8 @@ namespace Friday.Base.Tasks
 		private static int enqueuedTasks = 0;
 		public static int EnqueuedTasks => enqueuedTasks;
 
-		private static int currentlyExecutingTasks = 0;
-		public static int CurrentlyExecutingTasks => currentlyExecutingTasks;
+		private static int runningTasks = 0;
+		public static int RunningTasks => runningTasks;
 
 
 		/// <summary>
@@ -63,13 +63,13 @@ namespace Friday.Base.Tasks
 		{
 			var proxyTask = new Task(() =>
 			{
-				Interlocked.Increment(ref currentlyExecutingTasks);
+				Interlocked.Increment(ref runningTasks);
 
 				BeforeTaskExecution?.Invoke(task);
 				if (TryExecuteTask(task))
 					Interlocked.Decrement(ref enqueuedTasks);
 				AfterTaskExecution?.Invoke(task);
-				Interlocked.Decrement(ref currentlyExecutingTasks);
+				Interlocked.Decrement(ref runningTasks);
 			});
 
 			Interlocked.Increment(ref enqueuedTasks);

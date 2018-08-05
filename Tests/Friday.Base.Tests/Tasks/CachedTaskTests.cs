@@ -18,17 +18,6 @@ namespace Friday.Base.Tests.Tasks
 	{
 
 		[TestMethod]
-		public void CachingShouldBeSuccess2()
-		{
-
-			var dt = typeof(FridayTask).Assembly.GetLinkerDateTime();
-
-
-			Debug.WriteLine(dt);
-
-		}
-
-		[TestMethod]
 		public async Task CachingShouldBeSuccess()
 		{
 			const int taskValue = 10;

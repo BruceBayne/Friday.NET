@@ -20,12 +20,12 @@ namespace Friday.Base.Tests.Tasks
 			var task = Task.Run(async () =>
 			{
 				FridayTaskScheduler.EnqueuedTasks.Should().Be(1);
-				FridayTaskScheduler.CurrentlyExecutingTasks.Should().Be(1);
+				FridayTaskScheduler.RunningTasks.Should().Be(1);
 				await Task.Delay(50);
 			});
 
 			await task;
-			FridayTaskScheduler.CurrentlyExecutingTasks.Should().Be(0);
+			FridayTaskScheduler.RunningTasks.Should().Be(0);
 			FridayTaskScheduler.EnqueuedTasks.Should().Be(0);
 		}
 	}
