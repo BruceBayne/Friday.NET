@@ -503,9 +503,9 @@ FridayRandom.GetNextIncludingMax(0,100);
 
 
 
-var dateTime=typeof(ArgumentException).Assembly.GetLinkerDateTime()
-
-
-
+var dateTime=typeof(ArgumentException).Assembly.GetLinkerDateTime(); //will give you Compilation date taken from file header's
 
 ```
+
+
+Many of stuff above has unit test on it, feel free to try , feel free to contribute
