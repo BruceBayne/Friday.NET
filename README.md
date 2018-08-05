@@ -14,14 +14,14 @@ Lots of extension methods, Routing, and  auxiliary classes useful almost in ever
  + NO Third Party Reference free 
 
 # Task Extensions
-Allow you to #Globally/For whole domain, replace TaskScheduler that give additional information , such as how many tasks in queue,
+Allow you to replace default (ThreadPool) TaskScheduler with custom one, that give additional information , such as how many tasks in queue,
 which of them executing right now, e.t.c
 
 ```c#
 
-FridayTask.SetupFridaySchedulerAsDefault();
+FridayTask.SetupFridaySchedulerAsDefault(); //this will change TaskScheduler.Default
 
-this will give you access to 
+//now you can use
 FridayTaskScheduler.EnqueuedTasks;  // how many tasks are in ThreadPool Queue
 FridayTaskScheduler.RunningTasks; // how many tasks are currently running 
 
