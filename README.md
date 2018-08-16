@@ -11,7 +11,8 @@ Lots of extension methods, Routing, and  auxiliary classes useful almost in ever
  + NET Standart compatible
  + Xamarin compatible
  + Unity3d compatible
- + NO Third Party Reference free 
+ + NO Third Party References
+
 
 # Task Extensions
 Allow you to replace default (ThreadPool) TaskScheduler with custom one, that give additional information , such as how many tasks in queue,
@@ -30,7 +31,7 @@ FridayTaskScheduler.AfterTaskExecution; // same as above
 ```
  
  
-# Routing
+# Message Routing
  
 Useful in network applications with custom protocol messages, when they must be routed to specific processors
 
@@ -454,6 +455,7 @@ void Demo()
   
  
  ### Reference Counter
+ Provide simple reference counting with event when no references left
  ---
  ```c#
  var rc = new ReferenceCounter();  
@@ -465,6 +467,8 @@ void Demo()
  
  
  ## Friday Random
+  Really tired to setup classic Random every time you need it,
+  also did u know that GetNext by default exclude top from result? ie Random(10,20) never give's you 20?!
   ---
   ```c#  
 FridayRandom.SetSeed(seed:1234);
@@ -472,6 +476,19 @@ FridayRandom.IsRandomChanceOccured(chanceInPercent: 50);
 FridayRandom.GetNext(0,100);
 FridayRandom.GetNextIncludingMax(0,100);
 ```
+ 
+ 
+ ## Cached tasks 
+ Allow you to Cache any Task for some Time interval
+ ```c#
+  
+ 
+ ```
+ 
+ 
+ 
+ 
+ 
  
  
  ## And some miscellaneous stuff 
@@ -482,4 +499,12 @@ FridayRandom.GetNextIncludingMax(0,100);
 	 Console.WriteLine(Uptime.FullUptime); //print App uptime
      FridayDebugger.SafeBreak();	  // Break only if debugger attached
  } 
- ```
+
+
+
+var dateTime=typeof(ArgumentException).Assembly.GetLinkerDateTime(); //will give you Compilation date taken from file header's
+
+```
+
+
+Many of stuff above has unit test on it, feel free to try , feel free to contribute
