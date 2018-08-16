@@ -54,7 +54,7 @@ namespace Friday.Base.Routing
 		{
 			var table = GetSuitableTableCallFor<T>();
 			foreach (var route in table)
-				await callAction(route);
+				await callAction(route).ConfigureAwait(false);
 		}
 
 		private IEnumerable<T> GetSuitableTableCallFor<T>()
@@ -93,7 +93,7 @@ namespace Friday.Base.Routing
 			foreach (var record in routingTable)
 			{
 				var p = new ObjectToRoute(context, routedObject, record);
-				await CallMethod(p);
+				await CallMethod(p).ConfigureAwait(false);
 			}
 		}
 
@@ -141,7 +141,7 @@ namespace Friday.Base.Routing
 			{
 				var result = routeRecord.SelectedMethod?.Invoke(routeRecord.Processor, methodArguments);
 				if (result is Task t)
-					await t;
+					await t.ConfigureAwait(false);
 			}
 			catch (TargetInvocationException tie)
 			{

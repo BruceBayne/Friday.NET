@@ -15,15 +15,15 @@ namespace Friday.Network.Transport
 			try
 			{
 				if (e.IsText)
-					await ProcessTextMessage(e.Data);
+					await ProcessTextMessage(e.Data).ConfigureAwait(false);
 
 				if (e.IsBinary)
-					await ProcessBinaryMessage(e.RawData);
+					await ProcessBinaryMessage(e.RawData).ConfigureAwait(false);
 			}
 
 			catch (Exception ex)
 			{
-				await ProcessExceptionNvi(ex);
+				await ProcessExceptionNvi(ex).ConfigureAwait(false);
 			}
 		}
 
@@ -31,7 +31,7 @@ namespace Friday.Network.Transport
 		{
 			if (IsAlive)
 				Context.WebSocket.Close(CloseStatusCode.Normal);
-            
+
 		}
 
 		protected virtual Task ProcessBinaryMessage(byte[] eRawData)
@@ -44,7 +44,7 @@ namespace Friday.Network.Transport
 		{
 			try
 			{
-				await ProcessException(e);
+				await ProcessException(e).ConfigureAwait(false);
 			}
 			catch (Exception)
 			{

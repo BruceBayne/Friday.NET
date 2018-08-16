@@ -91,7 +91,7 @@ namespace Friday.Bitcoin.Services.PaymentMonitor.Payments
 				var until = new BlockFeature(monitoringElement.Until.BlockHeight);
 
 				var balance =
-					await client.GetBalanceBetween(new BalanceSelector(monitoringElement.Address), from, until);
+					await client.GetBalanceBetween(new BalanceSelector(monitoringElement.Address), from, until).ConfigureAwait(false);
 
 				if (balance == null)
 					throw new PaymentMonitorException($"Can't get {monitoringElement.Address} balance");

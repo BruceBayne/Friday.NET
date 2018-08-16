@@ -20,6 +20,9 @@ namespace Friday.Base.Tasks
 		public static int RunningTasks => runningTasks;
 
 
+
+
+
 		/// <summary>
 		/// Its highly recommended to protect this action using custom try/catch handlers
 		/// otherwise UnhandledTaskException occur's

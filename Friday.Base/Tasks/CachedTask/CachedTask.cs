@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Friday.Base.Tasks
+namespace Friday.Base.Tasks.CachedTask
 {
 	/// <summary>
 	/// Cache task result for specified time period

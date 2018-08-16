@@ -25,6 +25,13 @@ namespace Friday.Base.Extensions.Strings
 			return regex.IsMatch(input);
 		}
 
+		public static bool IsValidIpV4Address(this string input)
+		{
+			var regex = new Regex(RegularExpressions.IpV4AddressPattern);
+			return regex.IsMatch(input);
+		}
+
+
 		public static bool Contains(this string source, string value, StringComparison comp)
 		{
 			return source.IndexOf(value, comp) >= 0;

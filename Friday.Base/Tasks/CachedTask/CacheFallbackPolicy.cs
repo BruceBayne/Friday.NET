@@ -1,4 +1,4 @@
-﻿namespace Friday.Base.Tasks
+﻿namespace Friday.Base.Tasks.CachedTask
 {
 	public enum CacheFallbackPolicy
 	{

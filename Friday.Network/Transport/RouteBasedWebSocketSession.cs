@@ -59,18 +59,18 @@ namespace Friday.Network.Transport
 
 			if (IsAuthenticated)
 			{
-				await ProcessAuthorizedMessage(message);
+				await ProcessAuthorizedMessage(message).ConfigureAwait(false);
 				return;
 			}
 
 
 			if (message is TSignInMessage signInMessage)
 			{
-				await ProcessSignIn(signInMessage);
+				await ProcessSignIn(signInMessage).ConfigureAwait(false);
 				return;
 			}
 
-			await ProcessUnauthorizedMessage(message);
+			await ProcessUnauthorizedMessage(message).ConfigureAwait(false);
 		}
 
 
@@ -87,7 +87,7 @@ namespace Friday.Network.Transport
 			if (IsAuthenticated)
 				return;
 
-			RoutingContext = await authService.LoadContext(signInMessage, out var responseMessage);
+			RoutingContext = await authService.LoadContext(signInMessage, out var responseMessage).ConfigureAwait(false);
 			SendMessage(responseMessage);
 			RoutingContext.OnMessageAvailable += RouterOnMessageAvailable;
 			RoutingContext.Start();
@@ -110,7 +110,7 @@ namespace Friday.Network.Transport
 			}
 
 			MessageReadyToBeRouted(message);
-			await RoutingContext.RouteObjectAsync(this, message);
+			await RoutingContext.RouteObjectAsync(this, message).ConfigureAwait(false);
 			MessageRoutedSuccessfully(message);
 		}
 

@@ -1,22 +1,23 @@
-﻿namespace Friday.Base.Tasks
+﻿namespace Friday.Base.Common
 {
 	/// <summary>
 	/// Allow lock by hash code
+	/// Attention this class uses GetHashCode for objects, you MUST override it othrewise you got ~1000x performance slow down
 	/// </summary>
 	public sealed class HashCodeSynchronization
 	{
 		private const int DefaultBucketLockSize = 512;
 
 		private readonly int size;
-		public readonly object[] Locks;
+		private readonly object[] locks;
 
 		public HashCodeSynchronization(int size = DefaultBucketLockSize)
 		{
 			this.size = size;
 
-			Locks = new object[size];
+			locks = new object[size];
 			for (var x = 0; x < size; x++)
-				Locks[x] = new object();
+				locks[x] = new object();
 		}
 
 
@@ -24,7 +25,7 @@
 		{
 			var bucketToLockOn = (uint)key.GetHashCode() % size;
 
-			return Locks[bucketToLockOn];
+			return locks[bucketToLockOn];
 		}
 	}
 }

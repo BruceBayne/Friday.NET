@@ -181,6 +181,7 @@
     <Compile Include="Routing\RoutingInterfaceHandlerTests.cs" />
     <Compile Include="Tasks\CachedTaskTests.cs" />
     <Compile Include="Tasks\CustomTaskSchedulerTests.cs" />
+    <Compile Include="ValueType\SerializationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

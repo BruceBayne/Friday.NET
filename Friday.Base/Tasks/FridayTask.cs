@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using Friday.Base.Extensions.Reflection;
 
@@ -13,6 +14,28 @@ namespace Friday.Base.Tasks
 		public static FridayTaskScheduler FridayTaskScheduller { get; }
 
 		public static TaskFactory Factory { get; }
+
+
+		/// <summary>
+		/// Prevents UnobservedTaskException
+		/// </summary>
+		public static void ContinueWithDefaultExceptionHandler(this Task task, Action<Task> continuationAction)
+		{
+			AttachDefaultExceptionHandler(task.ContinueWith(continuationAction));
+		}
+
+
+
+
+		/// <summary>
+		/// Prevents UnobservedTaskException
+		/// </summary>
+		public static void AttachDefaultExceptionHandler(this Task task)
+		{
+			task.ContinueWith(task1 => FridayDebugger.LogFailedTask(task), TaskContinuationOptions.OnlyOnFaulted).ConfigureAwait(false);
+		}
+
+
 
 
 		static FridayTask()

@@ -44,7 +44,7 @@ namespace Friday.Network.Transport
 
 			try
 			{
-				await ProcessMessage(objectFromPacket);
+				await ProcessMessage(objectFromPacket).ConfigureAwait(false);
 			}
 			catch (Exception e)
 			{

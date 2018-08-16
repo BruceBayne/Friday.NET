@@ -2,7 +2,9 @@
 
 namespace Friday.Base.Routing
 {
-	public struct RouteOptions
+
+
+	public struct RouteOptions : IEquatable<RouteOptions>
 	{
 		public RouteProcessingBehavior ProcessingBehavior { get; private set; }
 		public string RouteTemplate { get; private set; }
@@ -57,6 +59,28 @@ namespace Friday.Base.Routing
 		public override string ToString()
 		{
 			return $"{nameof(ProcessingBehavior)}: {ProcessingBehavior}";
+		}
+
+		public bool Equals(RouteOptions other)
+		{
+			return ProcessingBehavior == other.ProcessingBehavior && string.Equals(RouteTemplate, other.RouteTemplate) && RouteCallType == other.RouteCallType;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			return obj is RouteOptions && Equals((RouteOptions)obj);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				var hashCode = (int)ProcessingBehavior;
+				hashCode = (hashCode * 397) ^ (RouteTemplate != null ? RouteTemplate.GetHashCode() : 0);
+				hashCode = (hashCode * 397) ^ (int)RouteCallType;
+				return hashCode;
+			}
 		}
 	}
 

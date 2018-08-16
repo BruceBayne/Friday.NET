@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using Friday.Base.Common;
 
 namespace Friday.Base.Tasks
 {
@@ -31,7 +32,8 @@ namespace Friday.Base.Tasks
 					elements.GetOrAdd(key, criteria =>
 					{
 						var newTask = createFunc();
-						newTask.ContinueWith(completedTask => { elements.TryRemove(key, out _); });
+
+						newTask.ContinueWithDefaultExceptionHandler(completedTask => { elements.TryRemove(key, out _); });
 						return newTask;
 					});
 
