@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Friday.Base.Logging;
 
-namespace Friday.Base.Tasks
+namespace Friday.Base.Tasks.Combinators
 {
 	public static class TaskCombinatorExtensions
 	{
-
-
-
-
-
 		public static async Task<T> WithTimeout<T>(this Task<T> task, TimeSpan delay)
 		{
 			var delayTask = Task.Delay(delay);
@@ -18,12 +12,12 @@ namespace Friday.Base.Tasks
 
 			if (firstToFinish == delayTask)
 			{
-				FridayTask.AttachDefaultExceptionHandler(task);
+				task.AttachDefaultExceptionHandler();
 				throw new TimeoutException();
 			}
+
 			return task.Result;
 		}
-
 
 
 		/// <summary>
@@ -41,7 +35,6 @@ namespace Friday.Base.Tasks
 
 		public static async Task<T> WithRetriesOnFail<T>(this Task<T> task, TimeSpan delayBetweenAttempts, int attempts = 3)
 		{
-
 			do
 			{
 				try
@@ -60,8 +53,6 @@ namespace Friday.Base.Tasks
 						await Task.Delay(delayBetweenAttempts).ConfigureAwait(false);
 				}
 			} while (true);
-
-
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Friday.Base.Extensions
@@ -14,6 +15,19 @@ namespace Friday.Base.Extensions
 			}
 			return default(TValue);
 		}
+
+
+		public static void RemoveAll<TKey, TValue>(this IDictionary<TKey, TValue> dic,
+			Func<TKey, TValue, bool> predicate)
+		{
+
+			var keys = dic.Keys.Where(k => predicate(k, dic[k])).ToList();
+			foreach (var key in keys)
+			{
+				dic.Remove(key);
+			}
+		}
+
 
 		public static void RemoveAllByValue<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TValue value)
 		{

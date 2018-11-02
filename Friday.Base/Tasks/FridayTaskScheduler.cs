@@ -16,11 +16,18 @@ namespace Friday.Base.Tasks
 		private static int enqueuedTasks = 0;
 		public static int EnqueuedTasks => enqueuedTasks;
 
+		public static int PendingTasks
+		{
+			get
+			{
+				var pendingTasks = enqueuedTasks - runningTasks;
+				return pendingTasks < 1 ? 0 : pendingTasks;
+			}
+		}
+
+
 		private static int runningTasks = 0;
 		public static int RunningTasks => runningTasks;
-
-
-
 
 
 		/// <summary>
@@ -64,19 +71,22 @@ namespace Friday.Base.Tasks
 
 		protected override void QueueTask(Task task)
 		{
-			var proxyTask = new Task(() =>
+			Interlocked.Increment(ref enqueuedTasks);
+
+			var proxyTask = Task.Factory.StartNew(() =>
 			{
 				Interlocked.Increment(ref runningTasks);
-
 				BeforeTaskExecution?.Invoke(task);
 				if (TryExecuteTask(task))
 					Interlocked.Decrement(ref enqueuedTasks);
 				AfterTaskExecution?.Invoke(task);
 				Interlocked.Decrement(ref runningTasks);
-			});
+			}, CancellationToken.None, task.CreationOptions, threadPoolTaskScheduler);
 
-			Interlocked.Increment(ref enqueuedTasks);
-			UseOriginalSchedulerQueueTask(proxyTask);
+			proxyTask.AttachDefaultExceptionHandler();
+
+
+			//UseOriginalSchedulerQueueTask(task);
 		}
 
 		protected void UseOriginalSchedulerQueueTask(Task proxyTask)
