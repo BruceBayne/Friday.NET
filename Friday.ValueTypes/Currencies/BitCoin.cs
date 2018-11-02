@@ -12,7 +12,7 @@ namespace Friday.ValueTypes.Currencies
 
 
 
-		public decimal ToBtc()
+		public decimal ToDecimal()
 		{
 
 			return (decimal)SatoshiAmount / (decimal)SatoshiInOneBtc;
@@ -41,10 +41,10 @@ namespace Friday.ValueTypes.Currencies
 			return SatoshiAmount.GetHashCode();
 		}
 
-		public static implicit operator ulong(BitCoin x)
-		{
-			return x.SatoshiAmount;
-		}
+		//public static implicit operator ulong(BitCoin x)
+		//{
+		//	return x.SatoshiAmount;
+		//}
 
 		private BitCoin(ulong satoshiAmount)
 		{
