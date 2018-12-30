@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Friday.Base.Regexp;
 
@@ -39,6 +41,13 @@ namespace Friday.Base.Extensions.Strings
 		public static bool ContainsNoCase(this string source, string value)
 		{
 			return Contains(source, value, StringComparison.OrdinalIgnoreCase);
+		}
+
+		public static string FixInvalidFileNameChars(this string source, char newChar = '_')
+		{
+			var invalidChars = Path.GetInvalidFileNameChars();
+
+			return invalidChars.Aggregate(source, (current, invalidChar) => current.Replace(invalidChar, newChar));
 		}
 	}
 }
