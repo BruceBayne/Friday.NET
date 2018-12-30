@@ -163,6 +163,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\StringExtensionTests.cs" />
     <Compile Include="Reflection\EventUtilsTests.cs" />
     <Compile Include="Reflection\MappingTests.cs" />
     <Compile Include="Reflection\Environment\TestEntity.cs" />
